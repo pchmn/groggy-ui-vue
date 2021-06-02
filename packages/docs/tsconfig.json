@@ -1,0 +1,23 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@la-danze-ui/vue": [
+        "../@la-danze-ui-vue/src/index"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "../@la-danze-ui-vue/src"
+  ],
+  "exclude": [
+    "../@la-danze-ui-vue/src/**/*.test.ts",
+    "../@la-danze-ui-vue/src/shims-vue.d.ts",
+    "../@la-danze-ui-vue/src/vite-env.d.ts",
+  ]
+}

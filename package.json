@@ -1,0 +1,37 @@
+{
+  "name": "monorepo-ui-lib-ts",
+  "version": "0.0.0",
+  "repository": "https://github.com/pchmn/monorepo-ui-lib.git",
+  "author": "pchmn",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "postinstall": "rm -rf ./.git/hooks && cp -r ./.githooks/ ./.git/hooks/",
+    "dev:lib": "yarn --cwd packages/@la-danze-ui-vue dev",
+    "build:lib": "yarn --cwd packages/@la-danze-ui-vue build",
+    "test:lib": "yarn --cwd packages/@la-danze-ui-vue test",
+    "test:ci:lib": "yarn --cwd packages/@la-danze-ui-vue test:ci",
+    "dev:docs": "yarn --cwd packages/docs dev",
+    "serve:docs": "yarn --cwd packages/docs serve",
+    "build:docs": "yarn --cwd packages/docs build",
+    "build": "yarn build:lib && yarn --cwd packages/docs install && yarn build:docs",
+    "build:ci": "yarn build",
+    "postbuild:ci": "rm -rf dist && mkdir dist && cp -r packages/docs/dist/. dist"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/github": "^7.2.3",
+    "eslint": "^7.27.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-vue": "^7.10.0",
+    "semantic-release": "^17.4.3",
+    "typescript": "^4.1.3"
+  }
+}

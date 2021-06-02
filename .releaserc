@@ -1,0 +1,39 @@
+{
+  "branches": ["vue-example"],
+  "plugins": [
+    ["@semantic-release/commit-analyzer", {
+      "preset": "angular",
+      "releaseRules": [
+        {"type": "demo", "release": false},
+        {"type": "conf", "release": false},
+        {"type": "style", "release": "patch"}
+      ]
+    }],
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    ["@semantic-release/npm", {
+      "pkgRoot": "packages/@la-danze-ui-vue"
+    }],
+    ["./.github/scripts/semantic-release.plugin.js", {
+      "files": [
+        {
+          "path": "config.js",
+          "versionKey": "LIB_VERSION"
+        },
+        "package.json",
+        "packages/docs/package.json"
+      ]
+    }],
+    ["@semantic-release/git", {
+      "assets": [
+        "package.json",
+        "packages/@la-danze-ui-vue/package.json",
+        "packages/docs/package.json",
+        "config.js",
+        "CHANGELOG.md"
+      ],
+      "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+    }],
+    "@semantic-release/github"
+  ]
+}
