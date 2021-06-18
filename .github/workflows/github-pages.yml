@@ -11,20 +11,20 @@ on:
     # Run only on main branch
     branches:
       - "vue-example"
-    # Run only if files modified are not in @la-danze-ui-vue package
+    # Run only if files modified are not in @groggy-ui-vue package
     # and are not github docs
     paths-ignore:
-      - "packages/@la-danze-ui-vue/**"
+      - "packages/@groggy-ui-vue/**"
       - "*.md"
       - ".github/docs/**"
   pull_request:
     # Run only on main branch
     branches:
       - "main"
-    # Run only if files modified are not in @la-danze-ui-vue package
+    # Run only if files modified are not in @groggy-ui-vue package
     # and are not github docs
     paths-ignore:
-      - "packages/@la-danze-ui-vue/**"
+      - "packages/@groggy-ui-vue/**"
       - "*.md"
       - ".github/docs/**"
 

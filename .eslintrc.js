@@ -1,37 +1,32 @@
 
 module.exports = {
+  root: true,
   env: {
-    browser: true, // Allows for the use of predefined global variables for browsers (document, window, etc.)
-    jest: true, // Allows for the use of predefined global variables for Jest (describe, test, etc.)
-    node: true, // Allows for the use of predefined global variables for Node.js (module, process, etc.)
+    browser: true,
+    es2021: true,
+    node: true,
   },
   extends: [
-    "eslint:recommended", // Use the recommened rules from eslint
-    "plugin:@typescript-eslint/recommended", // Use the recommended rules from @typescript-eslint/eslint-plugin
-    "prettier/@typescript-eslint", // Use eslint-config-prettier to disable ESLint formatting rules from @typescript-eslint/eslint-plugin that would conflict with Prettier
-    "plugin:prettier/recommended", // Enables eslint-plugin-prettier to display Prettier errors as ESLint errors
-    "plugin:vue/vue3-recommended"
+    "plugin:vue/vue3-recommended",
+    "eslint:recommended",
+    "@vue/typescript/recommended",
+    "@vue/prettier",
+    "@vue/prettier/@typescript-eslint",
+    "prettier"
   ],
-  parser: "@typescript-eslint/parser", // Specifies the ESLint parser
   parserOptions: {
-    ecmaVersion: 2020, // Allows for the parsing of modern ECMAScript features
-    ecmaFeatures: {
-      jsx: true // Allows for the parsing of JSX
-    },
-    sourceType: "module", // Allows for the use of imports
-    project: ['./tsconfig.json', './packages/*/tsconfig.json'],
-  },
-  plugins: [
-    "@typescript-eslint", // Allows for manually setting @typescript-eslint/* rules 
-    "prettier", // Allows for manually setting prettier/* rules
-  ],
-  settings: {
-    react: {
-      version: "detect" // Tells eslint-plugin-react to automatically detect the version of React to use
-    },
+    ecmaVersion: 2021,
   },
   rules: {
-    "prettier/prettier": ["error", { singleQuote: true, jsxSingleQuote: false, printWidth: 120, trailingComma: "none" }],
-    "@typescript-eslint/no-explicit-any": "off"
-  }
+    "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
+    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-unused-vars": ["off", { argsIgnorePattern: "^_" }],
+    "prettier/prettier": ["error", { singleQuote: true, endOfLine: "auto" }, { usePrettierrc: true }],
+  },
 };

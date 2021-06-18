@@ -4,18 +4,21 @@
   "[typescript]": {
     "editor.formatOnSave": false
   },
-  // Disable default VSCode formatting for TypeScript React files
-  "[typescriptreact]": {
+  "[vue]": {
     "editor.formatOnSave": false
   },
-  // Allow formatting for other languages
-  "editor.formatOnSave": false,
-  // Let ESLint (incorporating Prettier errors) format code on save
+  "eslint.validate": [
+    "vue",
+    "html",
+    "typescript"
+  ],
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "vetur.validation.template": false,
+  "vetur.validation.script": true,
+  "vetur.validation.style": false,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "vetur.experimental.templateInterpolationService": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "typescript.preferences.importModuleSpecifier": "non-relative",
-  "vetur.validation.template": false,
-  "vetur.validation.script": false,
-  "vetur.validation.style": false,
 }

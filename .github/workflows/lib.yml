@@ -73,11 +73,11 @@ jobs:
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
 
-      # Build lib (packages/@la-danze-ui-vue)
+      # Build lib (packages/@groggy-ui-vue)
       - name: BUILD
         run: yarn build:lib
 
-      # Test lib (packages/@la-danze-ui-vue)
+      # Test lib (packages/@groggy-ui-vue)
       # - name: TEST
       #   run: yarn test:ci:lib
 
@@ -87,12 +87,12 @@ jobs:
       # - uses: actions/upload-artifact@v2
       #   with:
       #     name: coverage
-      #     path: packages/@la-danze-ui-vue/coverage/lcov.info
+      #     path: packages/@groggy-ui-vue/coverage/lcov.info
 
       - uses: actions/upload-artifact@v2
         with:
           name: lib-dist
-          path: packages/@la-danze-ui-vue/dist/
+          path: packages/@groggy-ui-vue/dist/
       # ----------------------------------
       #         Upload artifacts
       # ----------------------------------
@@ -176,7 +176,7 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: lib-dist
-          path: packages/@la-danze-ui-vue/dist/
+          path: packages/@groggy-ui-vue/dist/
       # ----------------------------------
       #     Download dist artifacts
       # ----------------------------------
@@ -189,7 +189,7 @@ jobs:
 
       # Copy README.md to lib package (for npm)
       - name: COPY README.md
-        run: cp README.md packages/@la-danze-ui-vue/
+        run: cp README.md packages/@groggy-ui-vue/
 
       # Release
       - name: RELEASE

@@ -12,7 +12,7 @@
     "@semantic-release/release-notes-generator",
     "@semantic-release/changelog",
     ["@semantic-release/npm", {
-      "pkgRoot": "packages/@la-danze-ui-vue"
+      "pkgRoot": "packages/@groggy-ui-vue"
     }],
     ["./.github/scripts/semantic-release.plugin.js", {
       "files": [
@@ -27,7 +27,7 @@
     ["@semantic-release/git", {
       "assets": [
         "package.json",
-        "packages/@la-danze-ui-vue/package.json",
+        "packages/@groggy-ui-vue/package.json",
         "packages/docs/package.json",
         "config.js",
         "CHANGELOG.md"

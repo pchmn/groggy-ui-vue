@@ -3,8 +3,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@la-danze-ui/vue": [
-        "../@la-danze-ui-vue/src/index"
+      "@groggy-ui/vue": [
+        "../@groggy-ui-vue/src/index"
       ]
     }
   },
@@ -13,11 +13,11 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "../@la-danze-ui-vue/src"
+    "../@groggy-ui-vue/src/*"
   ],
   "exclude": [
-    "../@la-danze-ui-vue/src/**/*.test.ts",
-    "../@la-danze-ui-vue/src/shims-vue.d.ts",
-    "../@la-danze-ui-vue/src/vite-env.d.ts",
+    "../@groggy-ui-vue/src/**/*.test.ts",
+    "../@groggy-ui-vue/src/shims-vue.d.ts",
+    "../@groggy-ui-vue/src/vite-env.d.ts",
   ]
 }
