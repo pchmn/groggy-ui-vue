@@ -1,55 +1,41 @@
 <template>
-  <h1>{{ msg }}</h1>
+  <g-button variant="secondary" size="sm" outlined>Button</g-button>
+  <g-button variant="primary" @click="onClick">Button</g-button>
+  <g-button size="lg">Button</g-button>
+  <g-button outlined variant="primary">Button</g-button>
+  <g-button variant="success" outlined disabled>Button</g-button>
+  <g-button round variant="error" type="submit" disabled @click="onClick"
+    >Button</g-button
+  >
+  <g-checkbox v-model="checked" disabled>Petite checkbox</g-checkbox>
+  <g-checkbox v-model="checked" variant="primary"
+    >Petite checkbox primary</g-checkbox
+  >
 
-  <p>
-    Recommended IDE setup:
-    <a href="https://code.visualstudio.com/" target="_blank">VSCode</a>
-    +
-    <a
-      href="https://marketplace.visualstudio.com/items?itemName=octref.vetur"
-      target="_blank"
-    >
-      Vetur
-    </a>
-    or
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>
-    (if using
-    <code>&lt;script setup&gt;</code>)
-  </p>
-
-  <p>See <code>README.md</code> for more information.</p>
-
-  <p>
-    <a href="https://vitejs.dev/guide/features.html" target="_blank">
-      Vite Docs
-    </a>
-    |
-    <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Docs</a>
-  </p>
-
-  <!-- <button @click="count++">count is: {{ count }}</button> -->
-  <count-button></count-button>
-  <p>
-    Edit
-    <code>components/HelloWorld.vue</code> to test hot module replacement.
-  </p>
+  <div class="grid grid-flow-col grid-cols-3 grid-rows-3 gap-4 p-5">
+    <g-card>test</g-card>
+    <g-card outlined title="Title">Yo les amis</g-card>
+  </div>
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from 'vue'
+import { ref, defineComponent } from 'vue';
+
 export default defineComponent({
-  name: 'HelloWorld',
+  name: 'HelloWorldLol',
   props: {
     msg: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   setup: () => {
-    const count = ref(0)
-    return { count }
-  }
-})
+    const count = ref(0);
+    const checked = ref(true);
+    const onClick = (event: any) => console.log('click', event);
+    return { onClick, checked };
+  },
+});
 </script>
 
 <style scoped>
@@ -67,5 +53,10 @@ code {
   padding: 2px 4px;
   border-radius: 4px;
   color: #304455;
+}
+
+button {
+  margin-left: 5px;
+  margin-right: 5px;
 }
 </style>
