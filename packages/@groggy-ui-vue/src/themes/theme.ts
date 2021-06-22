@@ -29,5 +29,17 @@ export interface Theme {
       md: string;
       lg: string;
     };
+    checkbox: {
+      base: string;
+      variant: (variant: Variant) => string;
+      disabled: string;
+      label: string;
+      labelDisabled: string;
+    };
+    card: {
+      base: string;
+      outlined: string;
+      title: string;
+    };
   };
 }

@@ -130,6 +130,16 @@ module.exports = {
       height: {
         4.5: '1.125rem',
       },
+      width: {
+        4.5: '1.125rem',
+      },
+      transitionProperty: {
+        component:
+          'background-size, background-color, border-color, color, fill, stroke, box-shadow',
+      },
+      fontSize: {
+        base: '0.925rem',
+      },
     },
   },
   variants: {
@@ -179,5 +189,6 @@ module.exports = {
         },
       });
     },
+    require('@tailwindcss/forms'),
   ],
 };

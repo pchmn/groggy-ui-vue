@@ -34,6 +34,8 @@
     "vue-tsc": "^0.0.24"
   },
   "dependencies": {
+    "@tailwindcss/forms": "^0.3.3",
+    "deepmerge": "^4.2.2",
     "v-wave": "^1.2.8"
   }
 }

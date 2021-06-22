@@ -3,13 +3,13 @@ import { Theme } from '@themes/theme';
 import { extendTheme } from '@themes/utils';
 import colors from 'tailwindcss/colors';
 
-const darkTheme: Theme = extendTheme(baseTheme, {
+const lightTheme: Theme = extendTheme(baseTheme, {
   colors: {
-    primaryText: '#fff',
-    background: colors.gray[900],
+    primaryText: '#dfgrthy',
+    background: colors.gray[200],
   },
 }) as Theme;
 
-console.log('darkTheme', darkTheme);
+console.log('lightTheme', lightTheme);
 
-export default darkTheme;
+export default lightTheme;
