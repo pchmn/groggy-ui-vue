@@ -5,27 +5,52 @@
     :type="type"
     :disabled="disabled"
   >
-    <!-- <div
-      :class="`animate-spin
-        loader
-        ease-linear
-        rounded-full
-        border-4 border-t-4 border-${variant}-200
-        h-5
-        w-5
-        mr-3`"
-    ></div> -->
+    <!-- Loading spinner -->
+    <g-spinner
+      v-if="loading"
+      v-tw="'mr-2'"
+      :size="iconSize"
+      :variant="iconVariant"
+      :color="iconColor"
+    ></g-spinner>
+    <!-- Left icon -->
+    <g-icon
+      v-if="$slots['left-icon']"
+      v-tw="'mr-1.5'"
+      :size="iconSize"
+      :variant="iconVariant"
+      :color="iconColor"
+    >
+      <slot name="left-icon"></slot>
+    </g-icon>
+    <!-- Content -->
     <slot></slot>
+    <!-- Right icon -->
+    <g-icon
+      v-if="$slots['right-icon']"
+      v-tw="'ml-1.5'"
+      :size="iconSize"
+      :variant="iconVariant"
+      :color="iconColor"
+    >
+      <slot name="right-icon"></slot>
+    </g-icon>
   </button>
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, PropType, computed } from 'vue';
+import { defineComponent, PropType, computed } from 'vue';
 import { Variant, Size } from '@models/common-props.types';
-import { useTheme } from '@themes/useTheme';
+import { useComponentClasses } from '@themes/hooks/useComponentClasses';
+import GIcon from '@components/icon/Icon.vue';
+import GSpinner from '@components/spinner/Spinner.vue';
 
 export default defineComponent({
   name: 'Button',
+  components: {
+    GIcon,
+    GSpinner,
+  },
   props: {
     variant: {
       type: String as PropType<Variant>,
@@ -42,22 +67,24 @@ export default defineComponent({
     outlined: Boolean,
     disabled: Boolean,
     round: Boolean,
+    loading: Boolean,
   },
   setup: (props) => {
-    const { theme } = useTheme();
-    const rootClasses = computed(() => [
-      theme.components.button.base,
-      theme.components.button[props.size],
-      props.disabled
-        ? theme.components.button.disabled
-        : props.outlined
-        ? theme.components.button.variantOutlined(props.variant)
-        : theme.components.button.variant(props.variant),
-      {
-        [`${theme.components.button.round}`]: props.round,
-      },
-    ]);
-    return { rootClasses };
+    const rootClasses = computed(() => useComponentClasses('button', props));
+    const iconSize = computed(() => {
+      return props.size === 'sm'
+        ? '0.9rem'
+        : props.size === 'md'
+        ? '1.1rem'
+        : '1.4rem';
+    });
+    const iconVariant = computed(() => {
+      return props.outlined ? props.variant : 'default';
+    });
+    const iconColor = computed(() => {
+      return props.disabled ? 'white opacity-50' : '';
+    });
+    return { rootClasses, iconSize, iconVariant, iconColor };
   },
 });
 </script>
