@@ -1,45 +1,75 @@
 import { Variant } from '@models/common-props.types';
+import { ThemeColor } from 'twind';
 
-export interface Color {
-  [key: number]: string;
+export type ComponentNames =
+  | 'button'
+  | 'checkbox'
+  | 'card'
+  | 'icon'
+  | 'spinner';
+
+export interface BaseClass {
+  base: string;
+}
+export interface VariantClass {
+  variant: (variant: Variant) => string;
+}
+export interface ColorClass {
+  color: (color: string) => string;
+}
+export interface SizeClass {
+  sm: string;
+  md: string;
+  lg: string;
+}
+export interface MoreSizeClass extends SizeClass {
+  xs: string;
+  xl: string;
+}
+export interface RoundClass {
+  round: string;
+}
+export interface DisabledClass {
+  disabled: string;
+}
+export interface LabelClass {
+  label: string;
+  labelDisabled: string;
 }
 
-export interface Theme {
+export interface GTheme {
   colors: {
-    default: Color;
-    primary: Color;
-    secondary: Color;
-    success: Color;
-    info: Color;
-    warning: Color;
-    error: Color;
-
-    primaryText: string;
-    background: string;
+    default: ThemeColor;
+    primary: ThemeColor;
+    secondary: ThemeColor;
+    success: ThemeColor;
+    info: ThemeColor;
+    warning: ThemeColor;
+    error: ThemeColor;
   };
   fontFamily: string[];
   components: {
-    button: {
-      base: string;
-      variant: (variant: Variant) => string;
-      variantOutlined: (variant: Variant) => string;
-      disabled: string;
-      round: string;
-      sm: string;
-      md: string;
-      lg: string;
-    };
-    checkbox: {
-      base: string;
-      variant: (variant: Variant) => string;
-      disabled: string;
-      label: string;
-      labelDisabled: string;
-    };
+    button: BaseClass &
+      VariantClass &
+      SizeClass &
+      DisabledClass &
+      RoundClass & {
+        variantOutlined: (variant: Variant) => string;
+      };
+    checkbox: BaseClass &
+      VariantClass &
+      SizeClass &
+      RoundClass &
+      DisabledClass & {
+        label: string;
+        labelDisabled: string;
+      };
     card: {
       base: string;
       outlined: string;
       title: string;
     };
+    icon: VariantClass & ColorClass;
+    spinner: VariantClass & ColorClass;
   };
 }

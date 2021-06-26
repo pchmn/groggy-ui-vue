@@ -27,6 +27,7 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-unused-vars": ["off", { argsIgnorePattern: "^_" }],
+    "vue/require-default-prop": "off",
     "prettier/prettier": ["error", { singleQuote: true, endOfLine: "auto" }, { usePrettierrc: true }],
   },
 };

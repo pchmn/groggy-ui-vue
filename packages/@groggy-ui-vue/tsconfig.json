@@ -9,6 +9,9 @@
       "@components/*": [
         "src/components/*"
       ],
+      "@directives/*": [
+        "src/directives/*"
+      ],
       "@models/*": [
         "src/models/*"
       ],
