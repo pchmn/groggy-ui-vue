@@ -2,12 +2,14 @@
   <label class="inline-flex items-center">
     <input
       v-tw="'form-checkbox'"
-      :class="classes.inputClasses"
       type="checkbox"
+      :class="classes.inputClasses"
       :disabled="disabled"
-      :checked="modelValue"
       :indeterminate="indeterminate"
-      @change="$emit('update:modelValue', !modelValue)"
+      :checked="isChecked"
+      :true-value="trueValue"
+      :false-value="falseValue"
+      @change="updateInput"
     />
     <span :class="classes.labelClasses"><slot></slot></span>
   </label>
@@ -21,7 +23,6 @@ import { useComponentClasses } from '@themes/hooks/useComponentClasses';
 export default defineComponent({
   name: 'Checkbox',
   props: {
-    modelValue: Boolean,
     variant: {
       type: String as PropType<Variant>,
       default: 'default',
@@ -30,14 +31,47 @@ export default defineComponent({
       type: String as PropType<Size>,
       default: 'md',
     },
+    modelValue: [Boolean, String, Number, Array],
+    value: [String, Number],
+    trueValue: {
+      type: [Boolean, String, Number],
+      default: true,
+    },
+    falseValue: {
+      type: [Boolean, String, Number],
+      default: false,
+    },
     round: Boolean,
     disabled: Boolean,
     indeterminate: Boolean,
   },
   emits: ['update:modelValue'],
-  setup: (props) => {
+  setup: (props, { emit }) => {
     const classes = computed(() => useComponentClasses('checkbox', props));
-    return { classes };
+    const isChecked = computed(() => {
+      if (props.modelValue instanceof Array) {
+        return props.modelValue.includes(props.value);
+      }
+      return props.modelValue === props.trueValue;
+    });
+    const updateInput = (event: any) => {
+      const isChecked = event?.target?.checked;
+      if (props.modelValue instanceof Array) {
+        const newValue = [...props.modelValue];
+        if (isChecked) {
+          newValue.push(props.value);
+        } else {
+          newValue.splice(newValue.indexOf(props.value), 1);
+        }
+        emit('update:modelValue', newValue);
+      } else {
+        emit(
+          'update:modelValue',
+          isChecked ? props.trueValue : props.falseValue
+        );
+      }
+    };
+    return { classes, isChecked, updateInput };
   },
 });
 </script>
