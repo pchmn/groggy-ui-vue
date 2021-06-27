@@ -38,6 +38,18 @@ const baseTheme: GTheme = {
       md: 'h-4.5 w-4.5',
       lg: 'h-5.5 w-5.5',
     },
+    radio: {
+      base: 'rounded-full border(& gray-500 opacity-80) before::(border-4 border-transparent) focus:(ring ring-offset-0)',
+      variant: (variant: Variant) =>
+        `text-${variant}-500 hover:border-${variant}-500 focus:(border-${variant}-500 ring-${variant}-500 ring-opacity-50) checked:(border-${variant}-500 bg-${variant}-500 bg-opacity-20) checked:before::(border-${variant}-500) cursor-pointer`,
+      disabled:
+        'text(gray-500 opacity-50) bg(gray-500 opacity-20) checked:before::(border-gray-500) cursor-not-allowed',
+      label: 'ml-2 font-normal text-base cursor-pointer',
+      labelDisabled: 'text(gray-500 opacity-75) override:(cursor-not-allowed)',
+      sm: 'h-3.5 w-3.5',
+      md: 'h-4.5 w-4.5',
+      lg: 'h-5.5 w-5.5',
+    },
     card: {
       base: 'p-5 bg-gray-300 dark:bg-gray-800 shadow rounded flex flex-col',
       outlined: 'bg-gray-200 border(1 gray-300 gray-700(dark:&)) shadow-sm',

@@ -32,7 +32,9 @@ export function extendTheme(
 export type ComponentClassesType<T> = T extends 'button'
   ? string
   : T extends 'checkbox'
-  ? CheckboxClasses
+  ? InputClasses
+  : T extends 'radio'
+  ? InputClasses
   : T extends 'icon'
   ? string
   : T extends 'spinner'
@@ -53,6 +55,11 @@ export function getComponentClasses<T extends ComponentNames>(
     case 'checkbox':
       return getCheckboxClasses(
         gTheme.components.checkbox,
+        props
+      ) as ComponentClassesType<T>;
+    case 'radio':
+      return getRadioClasses(
+        gTheme.components.radio,
         props
       ) as ComponentClassesType<T>;
     case 'icon':
@@ -95,17 +102,17 @@ function getIconClasses(componentTheme: IconTheme, props: any): string {
   ]);
 }
 
-type CheckboxTheme = GTheme['components']['checkbox'];
-type CheckboxClasses = {
-  checkboxClasses: string;
+type InputClasses = {
+  inputClasses: string;
   labelClasses: string;
 };
+type CheckboxTheme = GTheme['components']['checkbox'];
 function getCheckboxClasses(
   componentTheme: CheckboxTheme,
   props: any
-): CheckboxClasses {
+): InputClasses {
   return {
-    checkboxClasses: tw([
+    inputClasses: tw([
       componentTheme.base,
       componentTheme[props.size as Size],
       props.disabled
@@ -114,6 +121,25 @@ function getCheckboxClasses(
       {
         [`${componentTheme.round}`]: props.round,
       },
+    ]),
+    labelClasses: tw([
+      componentTheme.label,
+      {
+        [`${componentTheme.labelDisabled}`]: props.disabled,
+      },
+    ]),
+  };
+}
+
+type RadioTheme = GTheme['components']['radio'];
+function getRadioClasses(componentTheme: RadioTheme, props: any): InputClasses {
+  return {
+    inputClasses: tw([
+      componentTheme.base,
+      componentTheme[props.size as Size],
+      props.disabled
+        ? componentTheme.disabled
+        : componentTheme.variant(props.variant),
     ]),
     labelClasses: tw([
       componentTheme.label,

@@ -60,6 +60,10 @@ export function setupTwind(gTheme: GTheme) {
           4.5: '1.125rem',
           5.5: '1.375rem',
         },
+        borderWidth: {
+          '4.5': '4.5px',
+          5: '5px',
+        },
         transitionProperty: {
           component:
             'background-size, background-color, border-color, color, fill, stroke, box-shadow',

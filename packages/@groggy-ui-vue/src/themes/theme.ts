@@ -6,7 +6,8 @@ export type ComponentNames =
   | 'checkbox'
   | 'card'
   | 'icon'
-  | 'spinner';
+  | 'spinner'
+  | 'radio';
 
 export interface BaseClass {
   base: string;
@@ -60,10 +61,9 @@ export interface GTheme {
       VariantClass &
       SizeClass &
       RoundClass &
-      DisabledClass & {
-        label: string;
-        labelDisabled: string;
-      };
+      DisabledClass &
+      LabelClass;
+    radio: BaseClass & VariantClass & SizeClass & DisabledClass & LabelClass;
     card: {
       base: string;
       outlined: string;
