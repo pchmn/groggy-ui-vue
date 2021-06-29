@@ -1,15 +1,17 @@
 <template>
   <label class="inline-flex items-center">
     <input
-      v-tw="'form-checkbox'"
+      :id="id"
+      v-model="computedValue"
       type="checkbox"
-      :class="classes.inputClasses"
+      :class="`form-checkbox ${classes.inputClasses}`"
+      :name="name"
       :disabled="disabled"
       :indeterminate="indeterminate"
-      :checked="isChecked"
       :true-value="trueValue"
       :false-value="falseValue"
-      @change="updateInput"
+      :value="value"
+      :checked="checked"
     />
     <span :class="classes.labelClasses"><slot></slot></span>
   </label>
@@ -31,8 +33,13 @@ export default defineComponent({
       type: String as PropType<Size>,
       default: 'md',
     },
-    modelValue: [Boolean, String, Number, Array],
-    value: [String, Number],
+    modelValue: [
+      Boolean,
+      String,
+      Number,
+      Array as () => Array<string | number>,
+    ],
+    value: [String, Number, Array as () => Array<string>],
     trueValue: {
       type: [Boolean, String, Number],
       default: true,
@@ -41,6 +48,9 @@ export default defineComponent({
       type: [Boolean, String, Number],
       default: false,
     },
+    checked: Boolean,
+    id: String,
+    name: String,
     round: Boolean,
     disabled: Boolean,
     indeterminate: Boolean,
@@ -48,30 +58,15 @@ export default defineComponent({
   emits: ['update:modelValue'],
   setup: (props, { emit }) => {
     const classes = computed(() => useComponentClasses('checkbox', props));
-    const isChecked = computed(() => {
-      if (props.modelValue instanceof Array) {
-        return props.modelValue.includes(props.value);
-      }
-      return props.modelValue === props.trueValue;
+    const computedValue = computed({
+      get(): boolean | string | number | (string | number)[] | undefined {
+        return props.modelValue;
+      },
+      set(value: boolean | string | number | (string | number)[] | undefined) {
+        emit('update:modelValue', value);
+      },
     });
-    const updateInput = (event: any) => {
-      const isChecked = event?.target?.checked;
-      if (props.modelValue instanceof Array) {
-        const newValue = [...props.modelValue];
-        if (isChecked) {
-          newValue.push(props.value);
-        } else {
-          newValue.splice(newValue.indexOf(props.value), 1);
-        }
-        emit('update:modelValue', newValue);
-      } else {
-        emit(
-          'update:modelValue',
-          isChecked ? props.trueValue : props.falseValue
-        );
-      }
-    };
-    return { classes, isChecked, updateInput };
+    return { classes, computedValue };
   },
 });
 </script>
