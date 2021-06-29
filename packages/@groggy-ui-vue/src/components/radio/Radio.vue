@@ -1,14 +1,15 @@
 <template>
   <label class="inline-flex items-center">
     <input
-      v-tw="'form-radio'"
-      :class="classes.inputClasses"
+      :id="id"
+      v-model="computedValue"
       type="radio"
+      :class="`form-radio ${classes.inputClasses}`"
       :disabled="disabled"
-      :checked="modelValue"
       :indeterminate="indeterminate"
       :name="name"
-      @change="$emit('update:modelValue', !modelValue)"
+      :value="value"
+      :checked="checked"
     />
     <span :class="classes.labelClasses"><slot></slot></span>
   </label>
@@ -22,8 +23,6 @@ import { useComponentClasses } from '@themes/hooks/useComponentClasses';
 export default defineComponent({
   name: 'Radio',
   props: {
-    modelValue: Boolean,
-    checked: Boolean,
     variant: {
       type: String as PropType<Variant>,
       default: 'default',
@@ -32,33 +31,28 @@ export default defineComponent({
       type: String as PropType<Size>,
       default: 'md',
     },
+    modelValue: [Boolean, String, Number],
+    value: [String, Number],
+    checked: Boolean,
     disabled: Boolean,
     indeterminate: Boolean,
     name: String,
+    id: String,
   },
   emits: ['update:modelValue'],
-  setup: (props) => {
+  setup: (props, { emit }) => {
     const classes = computed(() => useComponentClasses('radio', props));
-    return { classes };
+    const computedValue = computed({
+      get(): boolean | string | number | undefined {
+        return props.modelValue;
+      },
+      set(value: boolean | string | number | undefined) {
+        emit('update:modelValue', value);
+      },
+    });
+    return { classes, computedValue };
   },
 });
 </script>
 
-<style scoped>
-input {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 200ms ease;
-  transition-property: box-shadow, border-color;
-}
-input:before {
-  content: '';
-  display: block;
-  border-radius: 50%;
-  height: 50%;
-  width: 50%;
-  transition: all 300ms ease;
-  transition-property: border-color;
-}
-</style>
+<style scoped></style>

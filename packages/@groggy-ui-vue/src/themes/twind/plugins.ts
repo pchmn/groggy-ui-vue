@@ -70,7 +70,28 @@ const checkbox = (): CSSRules => ({
 });
 
 const radio = (): CSSRules => ({
-  '&': apply`rounded-full`,
+  '&': apply`rounded-full ${() => ({
+    display: `flex`,
+    alignItems: 'center',
+    justifyContent: 'center',
+    transitionTimingFunction: 'ease',
+    transitionProperty: 'box-shadow, border-color',
+    transitionDuration: '200ms',
+  })}`,
+  '&::before': {
+    content: `''`,
+    display: 'block',
+    borderRadius: '50%',
+    height: 0,
+    width: 0,
+    transitionTimingFunction: 'ease',
+    transitionProperty: 'height, width',
+    transitionDuration: '200ms',
+  },
+  '&:checked::before': {
+    height: '50%',
+    width: '50%',
+  },
 });
 
 export const formCheckbox = apply(toggle, checkbox);

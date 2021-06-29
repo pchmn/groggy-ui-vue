@@ -39,9 +39,9 @@ const baseTheme: GTheme = {
       lg: 'h-5.5 w-5.5',
     },
     radio: {
-      base: 'rounded-full border(& gray-500 opacity-80) before::(border-4 border-transparent) focus:(ring ring-offset-0)',
+      base: 'rounded-full border(& gray-500 opacity-80) focus:(ring ring-offset-0)',
       variant: (variant: Variant) =>
-        `text-${variant}-500 hover:border-${variant}-500 focus:(border-${variant}-500 ring-${variant}-500 ring-opacity-50) checked:(border-${variant}-500 bg-${variant}-500 bg-opacity-20) checked:before::(border-${variant}-500) cursor-pointer`,
+        `text-${variant}-500 before::bg-${variant}-500 hover:border-${variant}-500 focus:(border-${variant}-500 ring-${variant}-500 ring-opacity-50) checked:(border-${variant}-500 bg-${variant}-500 bg-opacity-20) cursor-pointer`,
       disabled:
         'text(gray-500 opacity-50) bg(gray-500 opacity-20) checked:before::(border-gray-500) cursor-not-allowed',
       label: 'ml-2 font-normal text-base cursor-pointer',
