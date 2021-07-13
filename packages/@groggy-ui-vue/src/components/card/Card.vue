@@ -1,6 +1,8 @@
 <template>
   <div :class="rootClasses">
-    <h2 v-if="title" :class="theme.components.card.title">{{ title }}</h2>
+    <h2 v-if="title" :class="tw(theme.theme.components.card.title)">
+      {{ title }}
+    </h2>
     <div class="flex-grow">
       <slot></slot>
     </div>
@@ -8,9 +10,9 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, PropType, computed } from 'vue';
-import { Variant, Size } from '@models/common-props.types';
-import { useTheme } from '@themes/useTheme';
+import { defineComponent, computed } from 'vue';
+import { useTheme } from '@themes/hooks/useTheme';
+import { tw } from 'twind';
 
 export default defineComponent({
   name: 'Card',
@@ -21,10 +23,10 @@ export default defineComponent({
   setup: (props) => {
     const { theme } = useTheme();
     const rootClasses = computed(() => [
-      theme.components.card.base,
-      { [`${theme.components.card.outlined}`]: props.outlined },
+      tw(theme.theme.components.card.base),
+      { [`${tw(theme.theme.components.card.outlined)}`]: props.outlined },
     ]);
-    return { rootClasses, theme };
+    return { rootClasses, theme, tw };
   },
 });
 </script>

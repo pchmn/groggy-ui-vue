@@ -3,8 +3,9 @@
     <input
       :id="id"
       v-model="computedValue"
+      v-tw="'form-checkbox'"
       type="checkbox"
-      :class="`form-checkbox ${classes.inputClasses}`"
+      :class="classes.inputClasses"
       :name="name"
       :disabled="disabled"
       :indeterminate="indeterminate"
@@ -19,15 +20,15 @@
 
 <script lang="ts">
 import { defineComponent, PropType, computed } from 'vue';
-import { Variant, Size } from '@models/common-props.types';
+import { Color, Size } from '@models/common-props.types';
 import { useComponentClasses } from '@themes/hooks/useComponentClasses';
 
 export default defineComponent({
   name: 'Checkbox',
   props: {
-    variant: {
-      type: String as PropType<Variant>,
-      default: 'default',
+    color: {
+      type: String as PropType<Color>,
+      default: 'primary',
     },
     size: {
       type: String as PropType<Size>,

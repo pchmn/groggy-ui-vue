@@ -1,5 +1,8 @@
-import { Variant } from '@models/common-props.types';
+import { Color, Variant } from '@models/common-props.types';
 import { ThemeColor } from 'twind';
+import * as colors from 'twind/colors';
+
+export type TwColors = keyof typeof colors;
 
 export type ComponentNames =
   | 'button'
@@ -7,16 +10,18 @@ export type ComponentNames =
   | 'card'
   | 'icon'
   | 'spinner'
-  | 'radio';
+  | 'radio'
+  | 'input';
 
 export interface BaseClass {
   base: string;
 }
-export interface VariantClass {
-  variant: (variant: Variant) => string;
-}
 export interface ColorClass {
-  color: (color: string) => string;
+  color: (color: Color) => string;
+}
+export interface VariantClass {
+  standard: (color: Color) => string;
+  outlined: (color: Color) => string;
 }
 export interface SizeClass {
   sm: string;
@@ -40,13 +45,14 @@ export interface LabelClass {
 
 export interface GTheme {
   colors: {
-    default: ThemeColor;
+    neutral: ThemeColor;
     primary: ThemeColor;
     secondary: ThemeColor;
     success: ThemeColor;
     info: ThemeColor;
     warning: ThemeColor;
     error: ThemeColor;
+    [key: string]: ThemeColor;
   };
   fontFamily: string[];
   components: {
@@ -55,21 +61,28 @@ export interface GTheme {
       SizeClass &
       DisabledClass &
       RoundClass & {
-        variantOutlined: (variant: Variant) => string;
+        flat: (color: Color) => string;
       };
     checkbox: BaseClass &
-      VariantClass &
+      ColorClass &
       SizeClass &
       RoundClass &
       DisabledClass &
       LabelClass;
-    radio: BaseClass & VariantClass & SizeClass & DisabledClass & LabelClass;
+    radio: BaseClass & ColorClass & SizeClass & DisabledClass & LabelClass;
     card: {
       base: string;
       outlined: string;
       title: string;
     };
-    icon: VariantClass & ColorClass;
-    spinner: VariantClass & ColorClass;
+    icon: ColorClass & ColorClass;
+    spinner: ColorClass & ColorClass;
+    input: BaseClass &
+      VariantClass &
+      SizeClass &
+      RoundClass &
+      DisabledClass & {
+        prefixSuffix: (variant: Variant) => string;
+      };
   };
 }

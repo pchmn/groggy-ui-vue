@@ -1,5 +1,5 @@
 import { GTheme } from '@themes/theme';
-import { formCheckbox, formRadio } from '@themes/twind/plugins';
+import { formCheckbox, formInput, formRadio } from '@themes/twind/plugins';
 import { shadeColor } from '@themes/utils';
 import { apply, setup } from 'twind';
 import * as colors from 'twind/colors';
@@ -10,10 +10,10 @@ export function setupTwind(gTheme: GTheme) {
     theme: {
       extend: {
         colors: {
-          default: {
-            ...(gTheme.colors.default as any),
+          neutral: {
+            ...(gTheme.colors.neutral as any),
             // @ts-expect-errorf theme colors
-            450: shadeColor(gTheme.colors.default[500], 10),
+            450: shadeColor(gTheme.colors.neutral[500], 10),
           },
           primary: {
             ...(gTheme.colors.primary as any),
@@ -73,16 +73,20 @@ export function setupTwind(gTheme: GTheme) {
           '3.5xl': '2rem',
           '4.5xl': '2.5rem',
         },
+        opacity: {
+          15: '0.15',
+        },
       },
     },
     preflight: (preflight, { theme }) => ({
       ...preflight,
       '@import': `url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&display=swap')`,
-      body: apply`dark:bg-gray-900 dark:text-white bg-gray-200 text-black text-base`,
+      body: apply`dark:bg-gray-900 dark:text-white bg-gray-100 text-black text-base`,
     }),
     plugins: {
       'form-checkbox': formCheckbox,
       'form-radio': formRadio,
+      'form-input': formInput,
     },
   });
 }

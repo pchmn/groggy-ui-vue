@@ -5,6 +5,7 @@ import { setupTwind } from '@themes/twind/setup';
 import { extendTheme } from '@themes/utils';
 import { DeepPartial } from '@utils/deepPartial';
 import VWave from 'v-wave';
+import { App, DefineComponent } from 'vue';
 import * as components from './components';
 import './style.css';
 
@@ -22,9 +23,9 @@ const MonorepoLibExample: MonorepoLibExamplePlugin = {
   ) {
     const { theme, applyTheme, switchThemeTo } = useTheme();
     if (options?.theme) {
-      applyTheme(extendTheme(theme, options.theme) as GTheme);
+      applyTheme(extendTheme(theme.theme, options.theme) as GTheme);
     }
-    setupTwind(theme);
+    setupTwind(theme.theme);
     // switchThemeTo('light');
     const prefix = 'G';
     for (const component in options?.components || components) {
@@ -37,7 +38,7 @@ const MonorepoLibExample: MonorepoLibExamplePlugin = {
     }
     app.use(VWave, {
       cancellationPeriod: 0,
-      duration: 0.3,
+      duration: 0.2,
       directive: 'ripple',
     });
     app.directive('tw', twDirective);
@@ -46,3 +47,5 @@ const MonorepoLibExample: MonorepoLibExamplePlugin = {
 
 export default MonorepoLibExample;
 export * from './components';
+export { useTheme };
+

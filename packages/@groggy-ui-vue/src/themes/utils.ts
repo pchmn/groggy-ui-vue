@@ -8,6 +8,14 @@ export interface MappedTheme {
   [key: string]: string | undefined;
 }
 
+export function getThemeColor(gTheme: GTheme, color: string): string {
+  const themeColor = gTheme.colors[color];
+  if (typeof themeColor === 'string') {
+    return themeColor;
+  }
+  return themeColor[500] as string;
+}
+
 export function shadeColor(color: string, amount: number) {
   return (
     '#' +
@@ -32,13 +40,15 @@ export function extendTheme(
 export type ComponentClassesType<T> = T extends 'button'
   ? string
   : T extends 'checkbox'
-  ? InputClasses
+  ? ToggleClasses
   : T extends 'radio'
-  ? InputClasses
+  ? ToggleClasses
   : T extends 'icon'
   ? string
   : T extends 'spinner'
   ? string
+  : T extends 'input'
+  ? InputClasses
   : undefined;
 
 export function getComponentClasses<T extends ComponentNames>(
@@ -72,6 +82,11 @@ export function getComponentClasses<T extends ComponentNames>(
         gTheme.components.spinner,
         props
       ) as ComponentClassesType<T>;
+    case 'input':
+      return getInputClasses(
+        gTheme.components.input,
+        props
+      ) as ComponentClassesType<T>;
     default:
       return undefined as ComponentClassesType<T>;
   }
@@ -79,14 +94,17 @@ export function getComponentClasses<T extends ComponentNames>(
 
 type ButtonTheme = GTheme['components']['button'];
 function getButtonClasses(componentTheme: ButtonTheme, props: any): string {
+  const variantTheme =
+    props.variant === 'outlined'
+      ? `${componentTheme.outlined(props.color)} outlined`
+      : props.variant === 'flat'
+      ? `${componentTheme.flat(props.color)} flat`
+      : componentTheme.standard(props.color);
+
   return tw([
     componentTheme.base,
     componentTheme[props.size as Size],
-    props.disabled
-      ? componentTheme.disabled
-      : props.outlined
-      ? componentTheme.variantOutlined(props.variant)
-      : componentTheme.variant(props.variant),
+    props.disabled ? componentTheme.disabled : variantTheme,
     {
       [`${componentTheme.round}`]: props.round as boolean,
     },
@@ -95,14 +113,10 @@ function getButtonClasses(componentTheme: ButtonTheme, props: any): string {
 
 type IconTheme = GTheme['components']['icon'];
 function getIconClasses(componentTheme: IconTheme, props: any): string {
-  return tw([
-    props.color
-      ? componentTheme.color(props.color)
-      : componentTheme.variant(props.variant),
-  ]);
+  return tw(componentTheme.color(props.color));
 }
 
-type InputClasses = {
+type ToggleClasses = {
   inputClasses: string;
   labelClasses: string;
 };
@@ -110,14 +124,14 @@ type CheckboxTheme = GTheme['components']['checkbox'];
 function getCheckboxClasses(
   componentTheme: CheckboxTheme,
   props: any
-): InputClasses {
+): ToggleClasses {
   return {
     inputClasses: tw([
       componentTheme.base,
       componentTheme[props.size as Size],
       props.disabled
         ? componentTheme.disabled
-        : componentTheme.variant(props.variant),
+        : componentTheme.color(props.color),
       {
         [`${componentTheme.round}`]: props.round,
       },
@@ -132,14 +146,17 @@ function getCheckboxClasses(
 }
 
 type RadioTheme = GTheme['components']['radio'];
-function getRadioClasses(componentTheme: RadioTheme, props: any): InputClasses {
+function getRadioClasses(
+  componentTheme: RadioTheme,
+  props: any
+): ToggleClasses {
   return {
     inputClasses: tw([
       componentTheme.base,
       componentTheme[props.size as Size],
       props.disabled
         ? componentTheme.disabled
-        : componentTheme.variant(props.variant),
+        : componentTheme.color(props.color),
     ]),
     labelClasses: tw([
       componentTheme.label,
@@ -147,5 +164,29 @@ function getRadioClasses(componentTheme: RadioTheme, props: any): InputClasses {
         [`${componentTheme.labelDisabled}`]: props.disabled,
       },
     ]),
+  };
+}
+
+type InputClasses = {
+  wrapperClasses: string;
+  inputClasses: string;
+  preffixSuffixClasses: string;
+};
+type InputTheme = GTheme['components']['input'];
+function getInputClasses(componentTheme: InputTheme, props: any): InputClasses {
+  return {
+    wrapperClasses: tw([
+      componentTheme.base,
+      props.disabled
+        ? componentTheme.disabled
+        : props.variant === 'outlined'
+        ? componentTheme.outlined(props.color)
+        : componentTheme.standard(props.color),
+      {
+        [`${componentTheme.round}`]: props.round,
+      },
+    ]),
+    inputClasses: tw(componentTheme[props.size as Size]),
+    preffixSuffixClasses: tw(componentTheme.prefixSuffix(props.variant)),
   };
 }

@@ -3,8 +3,9 @@
     <input
       :id="id"
       v-model="computedValue"
+      v-tw="'form-radio'"
       type="radio"
-      :class="`form-radio ${classes.inputClasses}`"
+      :class="classes.inputClasses"
       :disabled="disabled"
       :indeterminate="indeterminate"
       :name="name"
@@ -17,15 +18,15 @@
 
 <script lang="ts">
 import { defineComponent, PropType, computed } from 'vue';
-import { Variant, Size } from '@models/common-props.types';
+import { Color, Size } from '@models/common-props.types';
 import { useComponentClasses } from '@themes/hooks/useComponentClasses';
 
 export default defineComponent({
   name: 'Radio',
   props: {
-    variant: {
-      type: String as PropType<Variant>,
-      default: 'default',
+    color: {
+      type: String as PropType<Color>,
+      default: 'primary',
     },
     size: {
       type: String as PropType<Size>,

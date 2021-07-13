@@ -4,13 +4,13 @@
     :class="rootClasses"
     :type="type"
     :disabled="disabled"
+    :style="cssVars"
   >
     <!-- Loading spinner -->
     <g-spinner
       v-if="loading"
       v-tw="'mr-2'"
       :size="iconSize"
-      :variant="iconVariant"
       :color="iconColor"
     ></g-spinner>
     <!-- Left icon -->
@@ -18,7 +18,6 @@
       v-if="$slots['left-icon']"
       v-tw="'mr-1.5'"
       :size="iconSize"
-      :variant="iconVariant"
       :color="iconColor"
     >
       <slot name="left-icon"></slot>
@@ -30,7 +29,6 @@
       v-if="$slots['right-icon']"
       v-tw="'ml-1.5'"
       :size="iconSize"
-      :variant="iconVariant"
       :color="iconColor"
     >
       <slot name="right-icon"></slot>
@@ -39,11 +37,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed } from 'vue';
-import { Variant, Size } from '@models/common-props.types';
+import { defineComponent, PropType, computed, CSSProperties } from 'vue';
+import { Color, Size, Variant } from '@models/common-props.types';
 import { useComponentClasses } from '@themes/hooks/useComponentClasses';
 import GIcon from '@components/icon/Icon.vue';
 import GSpinner from '@components/spinner/Spinner.vue';
+import { useTheme } from '@themes/hooks/useTheme';
+import { getThemeColor, shadeColor } from '@themes/utils';
 
 export default defineComponent({
   name: 'Button',
@@ -52,24 +52,36 @@ export default defineComponent({
     GSpinner,
   },
   props: {
-    variant: {
-      type: String as PropType<Variant>,
-      default: 'default',
+    color: {
+      type: String as PropType<Color>,
+      default: 'primary',
     },
     size: {
       type: String as PropType<Size>,
       default: 'md',
     },
+    variant: {
+      type: String as PropType<Variant | 'flat'>,
+      default: 'standard',
+    },
     type: {
       type: String as PropType<'button' | 'submit' | 'reset'>,
       default: 'button',
     },
-    outlined: Boolean,
     disabled: Boolean,
     round: Boolean,
     loading: Boolean,
   },
   setup: (props) => {
+    const { theme } = useTheme();
+    const cssVars = computed(() => {
+      return {
+        '--hover-color': shadeColor(
+          getThemeColor(theme.theme, props.color),
+          15
+        ),
+      };
+    }) as CSSProperties;
     const rootClasses = computed(() => useComponentClasses('button', props));
     const iconSize = computed(() => {
       return props.size === 'sm'
@@ -78,15 +90,24 @@ export default defineComponent({
         ? '1.1rem'
         : '1.4rem';
     });
-    const iconVariant = computed(() => {
-      return props.outlined ? props.variant : 'default';
-    });
     const iconColor = computed(() => {
-      return props.disabled ? 'white opacity-50' : '';
+      return props.variant !== 'standard' && !props.disabled
+        ? props.color
+        : 'white';
     });
-    return { rootClasses, iconSize, iconVariant, iconColor };
+    return {
+      rootClasses,
+      iconSize,
+      iconColor,
+      cssVars: cssVars as CSSProperties,
+    };
   },
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+button:not(.outlined):not(.flat):not(:disabled):hover,
+button:not(.outlined):not(.flat):focus {
+  background-color: var(--hover-color);
+}
+</style>

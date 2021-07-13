@@ -5,18 +5,14 @@
 </template>
 
 <script lang="ts">
-import { Variant } from '@models/common-props.types';
+import { Color } from '@models/common-props.types';
 import { useComponentClasses } from '@themes/hooks/useComponentClasses';
 import { computed, defineComponent, PropType } from 'vue';
 
 export default defineComponent({
   name: 'Icon',
   props: {
-    variant: {
-      type: String as PropType<Variant>,
-      default: 'default',
-    },
-    color: String,
+    color: String as PropType<Color>,
     size: {
       type: String,
       default: '1.5rem',

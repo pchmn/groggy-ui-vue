@@ -20,5 +20,9 @@ export function useTheme() {
       : document.documentElement.classList.remove('dark');
   };
 
-  return { theme: state.theme, applyTheme, switchThemeTo };
+  return {
+    theme: state,
+    applyTheme,
+    switchThemeTo,
+  };
 }
