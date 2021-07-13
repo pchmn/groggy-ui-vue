@@ -8,9 +8,8 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.2.0",
-    "autoprefixer": "^10.2.6",
-    "postcss": "^8.3.0",
-    "tailwindcss": "^2.1.4",
+    "@vicons/carbon": "^0.10.0",
+    "twind": "^0.16.16",
     "vue": "^3.0.5"
   },
   "devDependencies": {

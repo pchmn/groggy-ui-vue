@@ -13,6 +13,6 @@ export default defineComponent({
 
 <style>
 #app {
-  padding: 60;
+  padding: 60px;
 }
 </style>
