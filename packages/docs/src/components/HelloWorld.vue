@@ -101,6 +101,17 @@
       size="lg"
       >Checkbox lg</g-checkbox
     >
+    <g-switch
+      v-model="checkboxGroup"
+      value="Switch sm"
+      size="sm"
+      color="secondary"
+      >Switch dm</g-switch
+    >
+    <g-switch v-model="checkboxGroup" value="Switch md">Switch md</g-switch>
+    <g-switch v-model="checkboxGroup" value="Switch lg" size="lg" disabled
+      >Switch lg</g-switch
+    >
     {{ checkboxGroup }}
   </div>
 
@@ -111,6 +122,7 @@
         <template #prefix>http://</template></g-input
       >
       <g-checkbox></g-checkbox>
+      <g-switch></g-switch>
       theme: {{ theme?.type }}
     </g-card>
     <g-card outlined title="Title">
@@ -123,7 +135,8 @@
           placeholder="Medium"
           status="error"
           helper-text="Warning message"
-          ><template #suffix-icon><lock /></template
+          variant="outlined"
+          ><template #prefix-icon><lock /></template
         ></g-input>
         <g-input placeholder="Default" variant="outlined"
           ><template #prefix>http://</template
@@ -133,6 +146,7 @@
           ><template #suffix-icon><user /></template
         ></g-input>
       </div>
+      <div v-tw="'inline-flex items-baseline'"></div>
     </g-card>
   </div>
 </template>
@@ -158,7 +172,7 @@ export default defineComponent({
   setup: () => {
     const { theme, switchThemeTo } = useTheme();
     const checked = ref(false);
-    const checkboxGroup = ref(['Checkbox lg']);
+    const checkboxGroup = ref(['Checkbox lg', 'Switch md']);
     const variant = ref('primary');
     const onClick = (event: any) => {
       console.log('click', event);
