@@ -9,7 +9,6 @@
     "packages/*"
   ],
   "scripts": {
-    "postinstall": "rm -rf ./.git/hooks && cp -r ./.githooks/ ./.git/hooks/",
     "dev:lib": "yarn --cwd packages/@groggy-ui-vue dev",
     "build:lib": "yarn --cwd packages/@groggy-ui-vue build",
     "test:lib": "yarn --cwd packages/@groggy-ui-vue test",
@@ -19,7 +18,8 @@
     "build:docs": "yarn --cwd packages/docs build",
     "build": "yarn build:lib && yarn --cwd packages/docs install && yarn build:docs",
     "build:ci": "yarn build",
-    "postbuild:ci": "rm -rf dist && mkdir dist && cp -r packages/docs/dist/. dist"
+    "postbuild:ci": "rm -rf dist && mkdir dist && cp -r packages/docs/dist/. dist",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
@@ -38,6 +38,7 @@
     "eslint-plugin-vue": "^7.10.0",
     "prettier": "^2.3.1",
     "semantic-release": "^17.4.3",
-    "typescript": "^4.1.3"
+    "typescript": "^4.1.3",
+    "husky": "^7.0.0"
   }
 }
