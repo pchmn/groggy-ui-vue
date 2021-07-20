@@ -14,26 +14,21 @@
       :value="value"
       :checked="checked"
     />
-    <span :class="classes.labelClasses"><slot></slot></span>
+    <span v-if="$slots['default']" :class="classes.labelClasses"
+      ><slot></slot
+    ></span>
   </label>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType, computed } from 'vue';
-import { Color, Size } from '@models/common-props.types';
 import { useComponentClasses } from '@themes/hooks/useComponentClasses';
+import componentFormProps from '@shared/form.props';
 
 export default defineComponent({
   name: 'Checkbox',
   props: {
-    color: {
-      type: String as PropType<Color>,
-      default: 'primary',
-    },
-    size: {
-      type: String as PropType<Size>,
-      default: 'md',
-    },
+    ...componentFormProps,
     modelValue: [
       Boolean,
       String,
@@ -50,10 +45,7 @@ export default defineComponent({
       default: false,
     },
     checked: Boolean,
-    id: String,
-    name: String,
     round: Boolean,
-    disabled: Boolean,
     indeterminate: Boolean,
   },
   emits: ['update:modelValue'],

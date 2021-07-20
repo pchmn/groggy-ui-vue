@@ -39,6 +39,10 @@ if (process.env.APP_ENV === 'development') {
       find: /^@utils\/(.*)/,
       replacement: path.resolve(__dirname, '../@groggy-ui-vue/src/utils/$1'),
     },
+    {
+      find: /^@shared\/(.*)/,
+      replacement: path.resolve(__dirname, '../@groggy-ui-vue/src/shared/$1'),
+    },
   ];
 }
 

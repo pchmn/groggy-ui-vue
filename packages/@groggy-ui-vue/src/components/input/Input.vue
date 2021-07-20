@@ -57,33 +57,24 @@
 </template>
 
 <script lang="ts">
-import { Size, Status, Color, Variant } from '@models/common-props.types';
+import { Status, Variant } from '@models/common-props.types';
 import { useComponentClasses } from '@themes/hooks/useComponentClasses';
+import componentFormProps from '@shared/form.props';
 import { computed, defineComponent, PropType } from 'vue';
 
 export default defineComponent({
   name: 'Input',
   props: {
-    id: String,
-    name: String,
+    ...componentFormProps,
     type: String as PropType<
       'text' | 'password' | 'email' | 'tel' | 'textarea'
     >,
-    disabled: Boolean,
     placeholder: String,
     modelValue: [String, Number],
     value: [String, Number],
-    color: {
-      type: String as PropType<Color>,
-      default: 'primary',
-    },
     variant: {
       type: String as PropType<Variant>,
       default: 'standard',
-    },
-    size: {
-      type: String as PropType<Size>,
-      default: 'md',
     },
     status: String as PropType<Status>,
     helperText: String,
