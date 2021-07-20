@@ -53,9 +53,21 @@ const baseTheme: GTheme = {
       md: 'h-4.5 w-4.5',
       lg: 'h-5.5 w-5.5',
     },
+    switch: {
+      base: 'relative inline-flex flex-shrink-0 rounded-full border(2 transparent) cursor-pointer focus:(outline-none shadow-md outline-none ring ring-opacity-40) focus-visible:(ring(2 white opacity-75)) transition-component duration-200',
+      color: (color: Color) => `focus:ring-${color}-500`,
+      circle:
+        'pointer-events-none inline-block rounded-full bg-white shadow-switch ring-0 transition-component duration-200',
+      disabled: 'override:bg-opacity-50 override:(cursor-not-allowed)',
+      label: 'ml-2 font-normal text-base cursor-pointer',
+      labelDisabled: 'text(gray-500 opacity-75) override:(cursor-not-allowed)',
+      sm: 'h-4 w-7 children:(h-3 w-3)',
+      md: 'h-5 w-9 children:(h-4 w-4)',
+      lg: 'h-6 w-11 children:(h-5 w-5)',
+    },
     card: {
       base: 'p-5 bg-white dark:bg-gray-800 shadow rounded flex flex-col',
-      outlined: 'bg-gray-100 border(1 gray-300 gray-700(dark:&)) shadow-sm',
+      outlined: 'border(1 gray-300 gray-700(dark:&)) shadow-sm',
       title: 'font-semibold text-lg mb-4',
     },
     icon: {
@@ -71,7 +83,7 @@ const baseTheme: GTheme = {
       standard: (color: Color) =>
         `border(1 gray-500 opacity-0) bg(gray-500 opacity-10) dark:bg-opacity-25 focus-within:(ring(${color}-500 opacity-40) bg(${color}-500 opacity-10) dark:bg-opacity-10 border(1 ${color}-500)) hover:border-${color}-500`,
       outlined: (color: Color) =>
-        `border(1 gray-500 opacity-50) focus-within:(ring(${color}-500 opacity-40) bg(${color}-500 opacity-20) dark:bg-opacity-10 border-${color}-500)  hover:border-${color}-500`,
+        `border(1 gray-500 opacity-50) focus-within:(ring(${color}-500 opacity-40) bg(${color}-500 opacity-10) dark:bg-opacity-10 border-${color}-500)  hover:border-${color}-500`,
       disabled: `text(white opacity-50) bg(gray-400 opacity-50) cursor-not-allowed`,
       round: 'rounded-full',
       prefixSuffix: (variant: Variant) =>

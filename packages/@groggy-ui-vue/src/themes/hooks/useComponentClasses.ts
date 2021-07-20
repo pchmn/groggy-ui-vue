@@ -4,10 +4,16 @@ import { ComponentClassesType, getComponentClasses } from '@themes/utils';
 
 export function useComponentClasses<T extends ComponentNames>(
   componentName: T,
-  props: any
+  props: any,
+  options?: any
 ): ComponentClassesType<T> {
   const { theme } = useTheme();
-  const classes = getComponentClasses<T>(theme.theme, componentName, props);
+  const classes = getComponentClasses<T>(
+    theme.theme,
+    componentName,
+    props,
+    options
+  );
 
   return classes;
 }

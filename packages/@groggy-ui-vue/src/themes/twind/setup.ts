@@ -66,7 +66,7 @@ export function setupTwind(gTheme: GTheme) {
         },
         transitionProperty: {
           component:
-            'background-size, background-color, border-color, color, fill, stroke, box-shadow',
+            'background-size, background-color, border-color, color, fill, stroke, box-shadow, width, transform',
         },
         fontSize: {
           base: '0.925rem',
@@ -75,6 +75,9 @@ export function setupTwind(gTheme: GTheme) {
         },
         opacity: {
           15: '0.15',
+        },
+        boxShadow: {
+          switch: '0px 1px 3px 1px rgba(0,0,0,0.4)',
         },
       },
     },

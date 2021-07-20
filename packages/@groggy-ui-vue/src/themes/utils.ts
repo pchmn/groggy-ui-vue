@@ -49,12 +49,15 @@ export type ComponentClassesType<T> = T extends 'button'
   ? string
   : T extends 'input'
   ? InputClasses
+  : T extends 'switch'
+  ? SwitchClasses
   : undefined;
 
 export function getComponentClasses<T extends ComponentNames>(
   gTheme: GTheme,
   componentName: T,
-  props: any
+  props: any,
+  options?: any
 ): ComponentClassesType<T> {
   switch (componentName) {
     case 'button':
@@ -86,6 +89,12 @@ export function getComponentClasses<T extends ComponentNames>(
       return getInputClasses(
         gTheme.components.input,
         props
+      ) as ComponentClassesType<T>;
+    case 'switch':
+      return getSwitchClasses(
+        gTheme.components.switch,
+        props,
+        options
       ) as ComponentClassesType<T>;
     default:
       return undefined as ComponentClassesType<T>;
@@ -160,9 +169,7 @@ function getRadioClasses(
     ]),
     labelClasses: tw([
       componentTheme.label,
-      {
-        [`${componentTheme.labelDisabled}`]: props.disabled,
-      },
+      props.disabled && componentTheme.labelDisabled,
     ]),
   };
 }
@@ -188,5 +195,41 @@ function getInputClasses(componentTheme: InputTheme, props: any): InputClasses {
     ]),
     inputClasses: tw(componentTheme[props.size as Size]),
     preffixSuffixClasses: tw(componentTheme.prefixSuffix(props.variant)),
+  };
+}
+
+type SwitchClasses = {
+  switchClasses: string;
+  circleClasses: string;
+  labelClasses: string;
+};
+type SwitchTheme = GTheme['components']['switch'];
+function getSwitchClasses(
+  componentTheme: SwitchTheme,
+  props: any,
+  enabled: boolean
+): SwitchClasses {
+  const translateCircle =
+    props.size === 'sm'
+      ? 'translate-x-3'
+      : props.size === 'md'
+      ? 'translate-x-4'
+      : 'translate-x-5';
+  return {
+    switchClasses: tw([
+      componentTheme.base,
+      componentTheme[props.size as Size],
+      componentTheme.color(props.color),
+      props.disabled && componentTheme.disabled,
+      enabled ? `bg-${props.color}-500` : `bg(gray-500 opacity-75)`,
+    ]),
+    labelClasses: tw([
+      componentTheme.label,
+      props.disabled && componentTheme.labelDisabled,
+    ]),
+    circleClasses: tw([
+      componentTheme.circle,
+      enabled ? translateCircle : 'translate-x-0',
+    ]),
   };
 }

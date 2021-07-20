@@ -11,7 +11,8 @@ export type ComponentNames =
   | 'icon'
   | 'spinner'
   | 'radio'
-  | 'input';
+  | 'input'
+  | 'switch';
 
 export interface BaseClass {
   base: string;
@@ -70,6 +71,13 @@ export interface GTheme {
       DisabledClass &
       LabelClass;
     radio: BaseClass & ColorClass & SizeClass & DisabledClass & LabelClass;
+    switch: BaseClass &
+      SizeClass &
+      DisabledClass &
+      LabelClass &
+      ColorClass & {
+        circle: string;
+      };
     card: {
       base: string;
       outlined: string;
