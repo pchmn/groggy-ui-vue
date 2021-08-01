@@ -54,7 +54,7 @@ const baseTheme: GTheme = {
       lg: 'h-5.5 w-5.5',
     },
     switch: {
-      base: 'relative inline-flex flex-shrink-0 rounded-full border(2 transparent) cursor-pointer focus:(outline-none shadow-md outline-none ring ring-opacity-40) focus-visible:(ring(2 white opacity-75)) transition-component duration-200',
+      base: 'relative inline-flex flex-shrink-0 rounded-full border(2 transparent) cursor-pointer focus:(outline-none shadow-md outline-none ring ring-opacity-40) transition-component duration-200',
       color: (color: Color) => `focus:ring-${color}-500`,
       circle:
         'pointer-events-none inline-block rounded-full bg-white shadow-switch ring-0 transition-component duration-200',
@@ -90,6 +90,21 @@ const baseTheme: GTheme = {
         `text-gray-400 bg(gray-500 opacity-10) dark:(bg(gray-500 opacity-20)) ${
           variant === 'outlined' ? 'border(gray-500 opacity-50)' : ''
         }`,
+      sm: 'py-0.5 px-2 text-sm',
+      md: 'py-1.5 px-3',
+      lg: 'py-2 px-4 text-lg',
+    },
+    select: {
+      base: 'relative w-full p(y-2 l-3 r-10) text-left rounded cursor-pointer focus:(outline-none)',
+      standard: (color: Color) =>
+        `border(1 gray-500 opacity-0) bg(gray-500 opacity-10) dark:bg-opacity-25 focus:(ring(${color}-500 opacity-40) bg(${color}-500 opacity-10) dark:bg-opacity-10 border(1 ${color}-500)) hover:border-${color}-500`,
+      outlined: (color: Color) =>
+        `border(1 gray-500 opacity-50) dark:bg-opacity-10 focus:(ring(${color}-500 opacity-40) bg(${color}-500 opacity-10) border-${color}-500) hover:border-${color}-500`,
+      disabled: `text(white opacity-50) bg(gray-400 opacity-50) cursor-not-allowed`,
+      round: 'rounded-full',
+      optionClass: '',
+      optionsContainerClass:
+        'absolute z-10 scroller w-full overflow-auto rounded shadow-lg py-1 mt-1 max-h-60 focus:outline-none',
       sm: 'py-0.5 px-2 text-sm',
       md: 'py-1.5 px-3',
       lg: 'py-2 px-4 text-lg',

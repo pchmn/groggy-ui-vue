@@ -9,6 +9,7 @@ declare module 'vue' {
     GSpinner: typeof import('@groggy-ui/vue')['GSpinner'];
     GInput: typeof import('@groggy-ui/vue')['GInput'];
     GSwitch: typeof import('@groggy-ui/vue')['GSwitch'];
+    GSelect: typeof import('@groggy-ui/vue')['GSelect'];
   }
 }
 

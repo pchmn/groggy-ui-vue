@@ -92,5 +92,13 @@ export interface GTheme {
       DisabledClass & {
         prefixSuffix: (variant: Variant) => string;
       };
+    select: BaseClass &
+      VariantClass &
+      SizeClass &
+      RoundClass &
+      DisabledClass & {
+        optionClass: string;
+        optionsContainerClass: string;
+      };
   };
 }
