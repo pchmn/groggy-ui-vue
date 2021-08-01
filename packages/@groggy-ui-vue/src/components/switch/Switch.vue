@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import componentFormProps from '@shared/form.props';
+import { componentFormProps } from '@shared/form.props';
 import { useComponentClasses } from '@themes/hooks/useComponentClasses';
 import { computed, defineComponent, onMounted, ref } from 'vue';
 

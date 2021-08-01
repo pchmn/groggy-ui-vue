@@ -23,7 +23,7 @@
 <script lang="ts">
 import { defineComponent, PropType, computed } from 'vue';
 import { useComponentClasses } from '@themes/hooks/useComponentClasses';
-import componentFormProps from '@shared/form.props';
+import { componentFormProps } from '@shared/form.props';
 
 export default defineComponent({
   name: 'Checkbox',

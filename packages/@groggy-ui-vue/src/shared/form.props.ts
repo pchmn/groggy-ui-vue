@@ -1,7 +1,7 @@
-import { Color, Size } from '@models/common-props.types';
+import { Color, Size, Status, Variant } from '@models/common-props.types';
 import { PropType } from 'vue';
 
-const componentFormProps = {
+export const componentFormProps = {
   id: String,
   name: String,
   disabled: Boolean,
@@ -15,4 +15,12 @@ const componentFormProps = {
   },
 };
 
-export default componentFormProps;
+export const componentInputTextPorps = {
+  placeholder: String,
+  variant: {
+    type: String as PropType<Variant>,
+    default: 'standard',
+  },
+  status: String as PropType<Status>,
+  helperText: String,
+};

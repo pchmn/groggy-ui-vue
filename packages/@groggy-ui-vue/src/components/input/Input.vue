@@ -59,25 +59,22 @@
 <script lang="ts">
 import { Status, Variant } from '@models/common-props.types';
 import { useComponentClasses } from '@themes/hooks/useComponentClasses';
-import componentFormProps from '@shared/form.props';
+import {
+  componentFormProps,
+  componentInputTextPorps,
+} from '@shared/form.props';
 import { computed, defineComponent, PropType } from 'vue';
 
 export default defineComponent({
   name: 'Input',
   props: {
     ...componentFormProps,
+    ...componentInputTextPorps,
     type: String as PropType<
       'text' | 'password' | 'email' | 'tel' | 'textarea'
     >,
-    placeholder: String,
     modelValue: [String, Number],
     value: [String, Number],
-    variant: {
-      type: String as PropType<Variant>,
-      default: 'standard',
-    },
-    status: String as PropType<Status>,
-    helperText: String,
   },
   emits: ['update:modelValue', 'update:variant'],
   setup: (props, { emit }) => {
