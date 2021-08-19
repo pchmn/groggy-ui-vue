@@ -1,5 +1,5 @@
 <template>
-  <i :class="classes" :style="{ height: size, width: size }">
+  <i :class="classes" :style="`--height: ${size}; --width: ${size}`">
     <slot></slot>
   </i>
 </template>
@@ -13,6 +13,7 @@ export default defineComponent({
   name: 'Icon',
   props: {
     color: String as PropType<Color>,
+    colorShade: Number,
     size: {
       type: String,
       default: '1.5rem',
@@ -27,8 +28,8 @@ export default defineComponent({
 
 <style scoped>
 i >>> svg {
-  width: 100%;
-  height: 100%;
+  width: var(--height);
+  height: var(--width);
   display: inherit;
 }
 </style>

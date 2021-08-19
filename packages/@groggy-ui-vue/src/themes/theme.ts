@@ -12,13 +12,14 @@ export type ComponentNames =
   | 'spinner'
   | 'radio'
   | 'input'
-  | 'switch';
+  | 'switch'
+  | 'select';
 
 export interface BaseClass {
   base: string;
 }
 export interface ColorClass {
-  color: (color: Color) => string;
+  color: (color: Color, shade?: number) => string;
 }
 export interface VariantClass {
   standard: (color: Color) => string;
@@ -97,7 +98,7 @@ export interface GTheme {
       SizeClass &
       RoundClass &
       DisabledClass & {
-        optionClass: string;
+        optionClasses: string;
         optionsContainerClass: string;
       };
   };
