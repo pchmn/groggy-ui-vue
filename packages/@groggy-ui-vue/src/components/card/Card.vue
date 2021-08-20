@@ -1,6 +1,6 @@
 <template>
   <div :class="rootClasses">
-    <h2 v-if="title" :class="tw(theme.theme.components.card.title)">
+    <h2 v-if="title" :class="tw(theme.value.components.card.title)">
       {{ title }}
     </h2>
     <div class="flex-grow">
@@ -23,8 +23,8 @@ export default defineComponent({
   setup: (props) => {
     const { theme } = useTheme();
     const rootClasses = computed(() => [
-      tw(theme.theme.components.card.base),
-      { [`${tw(theme.theme.components.card.outlined)}`]: props.outlined },
+      tw(theme.value.components.card.base),
+      { [`${tw(theme.value.components.card.outlined)}`]: props.outlined },
     ]);
     return { rootClasses, theme, tw };
   },

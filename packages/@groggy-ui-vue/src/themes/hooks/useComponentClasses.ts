@@ -9,7 +9,7 @@ export function useComponentClasses<T extends ComponentNames>(
 ): ComponentClassesType<T> {
   const { theme } = useTheme();
   const classes = getComponentClasses<T>(
-    theme.theme,
+    theme.value,
     componentName,
     props,
     options

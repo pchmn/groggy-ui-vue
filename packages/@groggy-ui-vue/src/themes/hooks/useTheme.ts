@@ -3,14 +3,14 @@ import { GTheme } from '@themes/theme';
 import { reactive } from 'vue';
 
 const state = reactive({
-  theme: baseTheme,
+  value: baseTheme,
   type: 'dark',
 });
 document.documentElement.classList.add('dark');
 
 export function useTheme() {
   const applyTheme = (theme: GTheme) => {
-    state.theme = theme;
+    state.value = theme;
   };
 
   const switchThemeTo = (type: 'dark' | 'light') => {

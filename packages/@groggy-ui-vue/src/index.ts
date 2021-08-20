@@ -23,9 +23,9 @@ const MonorepoLibExample: MonorepoLibExamplePlugin = {
   ) {
     const { theme, applyTheme, switchThemeTo } = useTheme();
     if (options?.theme) {
-      applyTheme(extendTheme(theme.theme, options.theme) as GTheme);
+      applyTheme(extendTheme(theme.value, options.theme) as GTheme);
     }
-    setupTwind(theme.theme);
+    setupTwind(theme.value);
     // switchThemeTo('light');
     const prefix = 'G';
     for (const component in options?.components || components) {
@@ -48,4 +48,3 @@ const MonorepoLibExample: MonorepoLibExamplePlugin = {
 export default MonorepoLibExample;
 export * from './components';
 export { useTheme };
-

@@ -7,4 +7,3 @@ export { default as GRadio } from './radio/Radio.vue';
 export { default as GSelect } from './select/Select.vue';
 export { default as GSpinner } from './spinner/Spinner.vue';
 export { default as GSwitch } from './switch/Switch.vue';
-
