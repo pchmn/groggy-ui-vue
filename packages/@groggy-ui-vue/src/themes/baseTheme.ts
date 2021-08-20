@@ -16,7 +16,7 @@ const baseTheme: GTheme = {
   fontFamily: ['Inter'],
   components: {
     button: {
-      base: `inline-flex items-center rounded shadow focus:(shadow-md outline-none ring) transition-component duration-200`,
+      base: `inline-flex items-center justify-center rounded shadow focus:(shadow-md outline-none ring) transition-component duration-200`,
       standard: (color: Color) =>
         `text-white bg-${color}-500 hover:shadow-md focus:bg-${color}-450 focus:ring-${color}-500 focus:ring-opacity-40`,
       outlined: (color: Color) =>

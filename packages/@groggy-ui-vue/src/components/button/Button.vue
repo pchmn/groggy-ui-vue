@@ -1,6 +1,7 @@
 <template>
   <button
     v-ripple="disabled ? { initialOpacity: 0, finalOpacity: 0 } : ''"
+    v-tw="fullWidth ? 'w-full' : ''"
     :class="rootClasses"
     :type="type"
     :disabled="disabled"
@@ -71,13 +72,14 @@ export default defineComponent({
     disabled: Boolean,
     round: Boolean,
     loading: Boolean,
+    fullWidth: Boolean,
   },
   setup: (props) => {
     const { theme } = useTheme();
     const cssVars = computed(() => {
       return {
         '--hover-color': shadeColor(
-          getThemeColor(theme.theme, props.color),
+          getThemeColor(theme.value, props.color),
           15
         ),
       };
