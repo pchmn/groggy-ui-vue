@@ -61,9 +61,9 @@ const baseTheme: GTheme = {
       disabled: 'override:bg-opacity-50 override:(cursor-not-allowed)',
       label: 'ml-2 font-normal text-base cursor-pointer',
       labelDisabled: 'text(gray-500 opacity-75) override:(cursor-not-allowed)',
-      sm: 'h-4 w-7 children:(h-3 w-3)',
-      md: 'h-5 w-9 children:(h-4 w-4)',
-      lg: 'h-6 w-11 children:(h-5 w-5)',
+      sm: 'h-4 w-7 children:(h-2.5 w-2.5) translate-y-px',
+      md: 'h-5 w-9 children:(h-3.5 w-3.5) translate-y-px',
+      lg: 'h-6 w-11 children:(h-4.5 w-4.5) translate-y-px',
     },
     card: {
       base: 'p-5 bg-white dark:bg-gray-800 shadow rounded flex flex-col',
@@ -71,8 +71,8 @@ const baseTheme: GTheme = {
       title: 'font-semibold text-lg mb-4',
     },
     icon: {
-      color: (color: Color) =>
-        `${color ? `text-${color}-500` : 'text-black dark:text-white'}`,
+      color: (color: Color, shade?: number) =>
+        `${color ? `text-${color}-${shade}` : 'text-black dark:text-white'}`,
     },
     spinner: {
       color: (color: Color) =>
@@ -81,7 +81,7 @@ const baseTheme: GTheme = {
     input: {
       base: 'inline-flex items-center rounded focus-within:(shadow-md ring) transition-component duration-200',
       standard: (color: Color) =>
-        `border(1 gray-500 opacity-0) bg(gray-500 opacity-10) dark:bg-opacity-25 focus-within:(ring(${color}-500 opacity-40) bg(${color}-500 opacity-10) dark:bg-opacity-10 border(1 ${color}-500)) hover:border-${color}-500`,
+        `shadow-sm border(1 gray-500 opacity-0) bg(gray-500 opacity-10) dark:bg-opacity-25 focus-within:(ring ring(${color}-500 opacity-40) bg(${color}-500 opacity-10) dark:bg-opacity-10 border(1 ${color}-500)) hover:border-${color}-500`,
       outlined: (color: Color) =>
         `border(1 gray-500 opacity-50) focus-within:(ring(${color}-500 opacity-40) bg(${color}-500 opacity-10) dark:bg-opacity-10 border-${color}-500)  hover:border-${color}-500`,
       disabled: `text(white opacity-50) bg(gray-400 opacity-50) cursor-not-allowed`,
@@ -90,22 +90,22 @@ const baseTheme: GTheme = {
         `text-gray-400 bg(gray-500 opacity-10) dark:(bg(gray-500 opacity-20)) ${
           variant === 'outlined' ? 'border(gray-500 opacity-50)' : ''
         }`,
-      sm: 'py-0.5 px-2 text-sm',
+      sm: 'py-1 px-2 text-sm',
       md: 'py-1.5 px-3',
       lg: 'py-2 px-4 text-lg',
     },
     select: {
-      base: 'relative w-full p(y-2 l-3 r-10) text-left rounded cursor-pointer focus:(outline-none)',
+      base: 'relative w-full inline-flex items-center justify-between text-left rounded cursor-pointer focus:(shadow-md outline-none ring) transition-component duration-200',
       standard: (color: Color) =>
-        `border(1 gray-500 opacity-0) bg(gray-500 opacity-10) dark:bg-opacity-25 focus:(ring(${color}-500 opacity-40) bg(${color}-500 opacity-10) dark:bg-opacity-10 border(1 ${color}-500)) hover:border-${color}-500`,
+        `shadow-sm border(1 gray-500 opacity-0) bg(gray-500 opacity-10) dark:bg-opacity-25 focus:(ring(${color}-500 opacity-40) bg(${color}-500 opacity-10) dark:bg-opacity-10 border(${color}-500 opacity-100)) hover:border-${color}-500`,
       outlined: (color: Color) =>
         `border(1 gray-500 opacity-50) dark:bg-opacity-10 focus:(ring(${color}-500 opacity-40) bg(${color}-500 opacity-10) border-${color}-500) hover:border-${color}-500`,
       disabled: `text(white opacity-50) bg(gray-400 opacity-50) cursor-not-allowed`,
       round: 'rounded-full',
-      optionClass: '',
+      optionClasses: `text-black override:dark:text-white inline-flex items-center justify-between w-full select-none relative py-1.5 px-3 cursor-pointer`,
       optionsContainerClass:
-        'absolute z-10 scroller w-full overflow-auto rounded shadow-lg py-1 mt-1 max-h-60 focus:outline-none',
-      sm: 'py-0.5 px-2 text-sm',
+        'absolute z-10 scroller w-full overflow-auto rounded shadow-lg py-1 mt-2 max-h-60 bg-gray-100 dark:bg-gray-600 focus:outline-none',
+      sm: 'py-1 px-3 text-sm',
       md: 'py-1.5 px-3',
       lg: 'py-2 px-4 text-lg',
     },

@@ -30,6 +30,12 @@ export function shadeColor(color: string, amount: number) {
   );
 }
 
+export function colorOpacity(hexColor: string, alpha: number) {
+  return `#${hexColor.replace('#', '')}${Math.floor(alpha * 255)
+    .toString(16)
+    .padStart(2)}`;
+}
+
 export function extendTheme(
   baseTheme: DeepPartial<GTheme>,
   newTheme: DeepPartial<GTheme>
@@ -51,6 +57,8 @@ export type ComponentClassesType<T> = T extends 'button'
   ? InputClasses
   : T extends 'switch'
   ? SwitchClasses
+  : T extends 'select'
+  ? SelectClasses
   : undefined;
 
 export function getComponentClasses<T extends ComponentNames>(
@@ -96,6 +104,11 @@ export function getComponentClasses<T extends ComponentNames>(
         props,
         options
       ) as ComponentClassesType<T>;
+    case 'select':
+      return getSelectClasses(
+        gTheme.components.select,
+        props
+      ) as ComponentClassesType<T>;
     default:
       return undefined as ComponentClassesType<T>;
   }
@@ -122,7 +135,7 @@ function getButtonClasses(componentTheme: ButtonTheme, props: any): string {
 
 type IconTheme = GTheme['components']['icon'];
 function getIconClasses(componentTheme: IconTheme, props: any): string {
-  return tw(componentTheme.color(props.color));
+  return tw(componentTheme.color(props.color, props.colorShade));
 }
 
 type ToggleClasses = {
@@ -198,6 +211,58 @@ function getInputClasses(componentTheme: InputTheme, props: any): InputClasses {
   };
 }
 
+type SelectClasses = {
+  inputClasses: {
+    open: string;
+    default: string;
+  };
+  iconClasses: {
+    default: string;
+    open: string;
+  };
+  optionsContainerClasses: string;
+  optionClasses: {
+    default: string;
+    active: string;
+    selected: string;
+  };
+};
+type SelectTheme = GTheme['components']['select'];
+function getSelectClasses(
+  componentTheme: SelectTheme,
+  props: any
+): SelectClasses {
+  return {
+    inputClasses: {
+      default: tw([
+        componentTheme.base,
+        componentTheme[props.size as Size],
+        props.disabled
+          ? componentTheme.disabled
+          : props.variant === 'outlined'
+          ? componentTheme.outlined(props.color)
+          : componentTheme.standard(props.color),
+        {
+          [`${componentTheme.round}`]: props.round,
+        },
+      ]),
+      open: tw(
+        `ring ring(${props.color}-500 opacity-40) border(${props.color}-500! opacity-100) bg(${props.color}-500! opacity-10!) dark:bg(${props.color}-500! opacity-10!)`
+      ),
+    },
+    iconClasses: {
+      default: tw('duration-200'),
+      open: tw('rotate-180'),
+    },
+    optionsContainerClasses: tw(componentTheme.optionsContainerClass),
+    optionClasses: {
+      default: tw(componentTheme.optionClasses),
+      active: tw(`bg(${props.color}-500 opacity-15)`),
+      selected: tw(`text-${props.color}-400! font-medium`),
+    },
+  };
+}
+
 type SwitchClasses = {
   switchClasses: string;
   circleClasses: string;
@@ -229,7 +294,7 @@ function getSwitchClasses(
     ]),
     circleClasses: tw([
       componentTheme.circle,
-      enabled ? translateCircle : 'translate-x-0',
+      enabled ? translateCircle : 'translate-x-0.5',
     ]),
   };
 }
