@@ -1,7 +1,7 @@
 <template>
   <div v-tw="'flex-col'">
     <div
-      v-tw="`${status ? `border(& ${status}-500 opacity-100)` : ''}`"
+      v-tw="[{ [`border(& ${status}-500 opacity-100)`]: status }, 'w-full']"
       :class="classes.wrapperClasses"
     >
       <!-- Prefix -->
@@ -25,7 +25,7 @@
       <input
         :id="id"
         v-model="computedValue"
-        v-tw="`form-input`"
+        v-tw="'form-input w-full'"
         :class="classes.inputClasses"
         :name="name"
         :type="type"
