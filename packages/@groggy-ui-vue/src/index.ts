@@ -1,12 +1,13 @@
+import clickOutsideDirective from '@directives/clickOutside.directive';
 import twDirective from '@directives/tw.directive';
 import { useTheme } from '@themes/hooks/useTheme';
 import { GTheme } from '@themes/theme';
 import { setupTwind } from '@themes/twind/setup';
 import { extendTheme } from '@themes/utils';
 import { DeepPartial } from '@utils/deepPartial';
+import 'twind/shim';
 import VWave from 'v-wave';
 import { App, DefineComponent } from 'vue';
-import * as components from './components';
 import './style.css';
 
 export interface MonorepoLibExamplePlugin {
@@ -28,12 +29,12 @@ const MonorepoLibExample: MonorepoLibExamplePlugin = {
     setupTwind(theme.value);
     // switchThemeTo('light');
     const prefix = 'G';
-    for (const component in options?.components || components) {
+    for (const component in options?.components) {
       app.component(
         // @ts-expect-error qsfdsf
-        `${prefix}${components[component].name}`,
+        `${prefix}${options.components[component].name}`,
         // @ts-expect-error qsfdsf
-        components[component]
+        options.components[component]
       );
     }
     app.use(VWave, {
@@ -42,9 +43,12 @@ const MonorepoLibExample: MonorepoLibExamplePlugin = {
       directive: 'ripple',
     });
     app.directive('tw', twDirective);
+    app.directive('click-outside', clickOutsideDirective);
   },
 };
 
 export default MonorepoLibExample;
 export * from './components';
+export * from './hooks';
+export * from './layouts';
 export { useTheme };

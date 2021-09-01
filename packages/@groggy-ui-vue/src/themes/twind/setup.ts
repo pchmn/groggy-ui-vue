@@ -47,6 +47,13 @@ export function setupTwind(gTheme: GTheme) {
           },
           gray: colors.gray,
         },
+        screens: {
+          sm: `${gTheme.screens.sm}px`,
+          md: `${gTheme.screens.md}px`,
+          lg: `${gTheme.screens.lg}px`,
+          xl: `${gTheme.screens.xl}px`,
+          '2xl': `${gTheme.screens['2xl']}px`,
+        },
         fontFamily: {
           sans: gTheme.fontFamily,
         },
@@ -59,6 +66,11 @@ export function setupTwind(gTheme: GTheme) {
           3.5: '0.875rem',
           4.5: '1.125rem',
           5.5: '1.375rem',
+        },
+        maxWidth: {
+          '1/4': '25%',
+          '1/2': '50%',
+          '3/4': '75%',
         },
         borderWidth: {
           '4.5': '4.5px',

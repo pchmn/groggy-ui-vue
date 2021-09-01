@@ -1,8 +1,14 @@
 export { default as GButton } from './button/Button.vue';
 export { default as GCard } from './card/Card.vue';
 export { default as GCheckbox } from './checkbox/Checkbox.vue';
+export { default as GDrawer } from './drawer/Drawer.vue';
+export { default as GDrawerGroup } from './drawer/DrawerGroup.vue';
+export { default as GDrawerItem } from './drawer/DrawerItem.vue';
+export { default as GIconButton } from './icon-button/IconButton.vue';
 export { default as GIcon } from './icon/Icon.vue';
 export { default as GInput } from './input/Input.vue';
+export { default as GList } from './list/List.vue';
+export { default as GListItem } from './list/ListItem.vue';
 export { default as GRadio } from './radio/Radio.vue';
 export { default as GSelect } from './select/Select.vue';
 export { default as GSpinner } from './spinner/Spinner.vue';

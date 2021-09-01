@@ -1,6 +1,7 @@
 import vue from '@vitejs/plugin-vue';
 import path from 'path';
 import { AliasOptions, defineConfig } from 'vite';
+import svgLoader from 'vite-svg-loader';
 
 let alias: AliasOptions = {};
 if (process.env.APP_ENV === 'development') {
@@ -43,12 +44,25 @@ if (process.env.APP_ENV === 'development') {
       find: /^@shared\/(.*)/,
       replacement: path.resolve(__dirname, '../@groggy-ui-vue/src/shared/$1'),
     },
+    {
+      find: /^@hooks\/(.*)/,
+      replacement: path.resolve(__dirname, '../@groggy-ui-vue/src/hooks/$1'),
+    },
+    {
+      find: /^@docs\/(.*)/,
+      replacement: path.resolve(__dirname, 'src/$1'),
+    },
   ];
 }
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    // svgLoader({
+    //   svgo: false,
+    // }),
+  ],
   base: '/groggy-ui-vue/',
   resolve: {
     alias,

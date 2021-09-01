@@ -13,6 +13,13 @@ const baseTheme: GTheme = {
     error: colors.red,
     ...colors,
   },
+  screens: {
+    sm: 640,
+    md: 768,
+    lg: 1024,
+    xl: 1280,
+    '2xl': 1536,
+  },
   fontFamily: ['Inter'],
   components: {
     button: {
@@ -66,12 +73,15 @@ const baseTheme: GTheme = {
       lg: 'h-6 w-11 children:(h-4.5 w-4.5) translate-y-px',
     },
     card: {
-      base: 'p-5 bg-white dark:bg-gray-800 shadow rounded flex flex-col',
+      base: 'bg-white dark:bg-gray-800 shadow rounded flex flex-row',
       outlined: 'border(1 gray-300 gray-700(dark:&)) shadow-sm',
       title: 'font-semibold text-lg mb-4',
+      sm: 'p-3',
+      md: 'p-5',
+      lg: 'p-7',
     },
     icon: {
-      color: (color: Color, shade?: number) =>
+      color: (color?: Color, shade = 500) =>
         `${color ? `text-${color}-${shade}` : 'text-black dark:text-white'}`,
     },
     spinner: {
@@ -108,6 +118,29 @@ const baseTheme: GTheme = {
       sm: 'py-1 px-3 text-sm',
       md: 'py-1.5 px-3',
       lg: 'py-2 px-4 text-lg',
+    },
+    list: {
+      sm: 'p-1',
+      md: 'p-2',
+      lg: 'p-3',
+    },
+    listItem: {
+      base: 'my-0.5 text-black override:dark:text-white rounded inline-flex items-center w-full select-none cursor-pointer transition-component duration-200',
+      activeColor: (color: Color) => `hover:bg(${color}-500 opacity-15)`,
+      sm: 'py-1 px-2',
+      md: 'py-1.5 px-3',
+      lg: 'py-2.5 px-5',
+    },
+    iconButton: {
+      base: 'rounded-lg focus:outline-none transition-component duration-200',
+      round: 'rounded-full',
+      standard: (color?: Color, shade = 500) =>
+        `hover:bg(${color}-${shade} opacity-15)`,
+      outlined: (color?: Color, shade = 500) =>
+        `border(1 ${color}-${shade} opacity-50) hover:bg(${color}-${shade} opacity-15)`,
+      sm: 'p-1',
+      md: 'p-2',
+      lg: 'p-5',
     },
   },
 };

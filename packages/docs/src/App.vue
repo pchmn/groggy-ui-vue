@@ -1,18 +1,14 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <hello-world msg="lol"></hello-world>
+  <div class="flex flex-col h-full">
+    <!-- <Header /> -->
+    <router-view class="flex-grow"></router-view>
+  </div>
+  <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
+  <!-- <hello-world msg="lol"></hello-world> -->
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'App',
-});
+<script setup lang="ts">
+import Header from '@docs/core/layouts/Header.vue';
 </script>
 
-<style>
-#app {
-  padding: 60px;
-}
-</style>
+<style></style>

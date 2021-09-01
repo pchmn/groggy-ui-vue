@@ -30,7 +30,6 @@ export default defineComponent({
     },
   },
   setup: (props) => {
-    console.log('props spinner', props);
     const classes = computed(() => useComponentClasses('spinner', props));
     return { classes };
   },

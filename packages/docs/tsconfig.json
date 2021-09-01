@@ -5,6 +5,9 @@
     "paths": {
       "@groggy-ui/vue": [
         "../@groggy-ui-vue/src/index"
+      ],
+      "@docs/*": [
+        "src/*"
       ]
     }
   },

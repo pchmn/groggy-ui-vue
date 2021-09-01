@@ -22,8 +22,8 @@ export interface ColorClass {
   color: (color: Color, shade?: number) => string;
 }
 export interface VariantClass {
-  standard: (color: Color) => string;
-  outlined: (color: Color) => string;
+  standard: (color: Color, shade?: number) => string;
+  outlined: (color: Color, shade?: number) => string;
 }
 export interface SizeClass {
   sm: string;
@@ -34,6 +34,7 @@ export interface MoreSizeClass extends SizeClass {
   xs: string;
   xl: string;
 }
+export type PaddingClass = SizeClass;
 export interface RoundClass {
   round: string;
 }
@@ -55,6 +56,13 @@ export interface GTheme {
     warning: ThemeColor;
     error: ThemeColor;
     [key: string]: ThemeColor;
+  };
+  screens: {
+    sm: number;
+    md: number;
+    lg: number;
+    xl: number;
+    '2xl': number;
   };
   fontFamily: string[];
   components: {
@@ -79,7 +87,7 @@ export interface GTheme {
       ColorClass & {
         circle: string;
       };
-    card: {
+    card: PaddingClass & {
       base: string;
       outlined: string;
       title: string;
@@ -101,5 +109,11 @@ export interface GTheme {
         optionClasses: string;
         optionsContainerClass: string;
       };
+    list: PaddingClass;
+    listItem: BaseClass &
+      SizeClass & {
+        activeColor: (color: Color) => string;
+      };
+    iconButton: BaseClass & VariantClass & SizeClass & RoundClass;
   };
 }

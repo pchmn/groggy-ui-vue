@@ -16,35 +16,35 @@
     ></g-spinner>
     <!-- Left icon -->
     <g-icon
-      v-if="$slots['left-icon']"
+      v-if="$slots['prefix-icon']"
       v-tw="'mr-1.5'"
       :size="iconSize"
       :color="iconColor"
     >
-      <slot name="left-icon"></slot>
+      <slot name="prefix-icon"></slot>
     </g-icon>
     <!-- Content -->
     <slot></slot>
     <!-- Right icon -->
     <g-icon
-      v-if="$slots['right-icon']"
+      v-if="$slots['suffix-icon']"
       v-tw="'ml-1.5'"
       :size="iconSize"
       :color="iconColor"
     >
-      <slot name="right-icon"></slot>
+      <slot name="suffix-icon"></slot>
     </g-icon>
   </button>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed, CSSProperties } from 'vue';
-import { Color, Size, Variant } from '@models/common-props.types';
-import { useComponentClasses } from '@themes/hooks/useComponentClasses';
 import GIcon from '@components/icon/Icon.vue';
 import GSpinner from '@components/spinner/Spinner.vue';
+import { Color, Size, Variant } from '@models/common-props.types';
+import { useComponentClasses } from '@themes/hooks/useComponentClasses';
 import { useTheme } from '@themes/hooks/useTheme';
 import { getThemeColor, shadeColor } from '@themes/utils';
+import { computed, CSSProperties, defineComponent, PropType } from 'vue';
 
 export default defineComponent({
   name: 'Button',

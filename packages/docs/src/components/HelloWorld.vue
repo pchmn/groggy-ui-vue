@@ -72,7 +72,9 @@
     <g-icon><adjustments /></g-icon>
     <g-icon color="red-500" size="2rem"><adjustments /></g-icon>
     <g-icon variant="secondary" size="40px"><adjustments /></g-icon> -->
+    <g-icon size="0.75rem"><adjustments /></g-icon>
   </div>
+  <g-button loading :full-width="true">Button</g-button>
 
   <br />
   <div v-tw="'inline-flex items-center'">
@@ -109,7 +111,7 @@
       >Switch dm</g-switch
     >
     <g-switch v-model="checkboxGroup" value="Switch md">Switch md</g-switch>
-    <g-switch v-model="checkboxGroup" value="Switch lg" size="lg" disabled
+    <g-switch v-model="checkboxGroup" value="Switch lg" size="lg"
       >Switch lg</g-switch
     >
     {{ checkboxGroup }}
@@ -117,6 +119,28 @@
 
   <div class="grid grid-flow-col grid-cols-3 grid-rows-3 gap-4 p-5">
     <g-card>
+      <div style="width: 250px">
+        <g-select
+          v-model="stringOptionSelected"
+          size="sm"
+          color="secondary"
+          :options="stringOption"
+          bind-label="name"
+          bind-value="name"
+          placeholder="Choisis un fruit"
+          variant="outlined"
+          :full-wdith="true"
+        ></g-select>
+      </div>
+      <div style="width: 250px">
+        <g-select
+          v-model="selectedPerson"
+          color="primary"
+          :options="people"
+          bind-label="name"
+          bind-value="name"
+        ></g-select>
+      </div>
       <g-input :variant="variant" placeholder="Placeholder"
         ><template #suffix-icon><user /></template>
         <template #prefix>http://</template></g-input
@@ -148,6 +172,8 @@
       </div>
       <div v-tw="'inline-flex items-baseline'"></div>
     </g-card>
+
+    <g-card> </g-card>
   </div>
 </template>
 
@@ -181,7 +207,35 @@ export default defineComponent({
     const switchTheme = () => {
       switchThemeTo(theme?.type === 'dark' ? 'light' : 'dark');
     };
-    return { onClick, checked, checkboxGroup, theme, switchTheme, variant };
+    const stringOption = ['banane', 'pomme', 'orange'];
+    const stringOptionSelected = ref(null);
+    const people = [
+      { name: 'Wade Cooper' },
+      { name: 'Arlene Mccoy' },
+      { name: 'Devon Webb' },
+      { name: 'Tom Cook' },
+      { name: 'Tanya Fox' },
+      { name: 'Hellen Schmidt' },
+      { name: 'Hellen Schmidt' },
+      { name: 'Hellen Schmidt' },
+      { name: 'Hellen Schmidt' },
+      { name: 'Hellen Schmidt' },
+      { name: 'Hellen Schmidt' },
+      { name: 'Hellen Schmidtfsdgdfsgdfsgdfgdfgdfgdfgdfgdfgd' },
+    ];
+    const selectedPerson = ref(people[0]);
+    return {
+      onClick,
+      checked,
+      checkboxGroup,
+      theme,
+      switchTheme,
+      variant,
+      people,
+      selectedPerson,
+      stringOption,
+      stringOptionSelected,
+    };
   },
 });
 </script>
