@@ -23,18 +23,18 @@ const baseTheme: GTheme = {
   fontFamily: ['Inter'],
   components: {
     button: {
-      base: `inline-flex items-center justify-center rounded shadow focus:(shadow-md outline-none ring) transition-component duration-200`,
+      base: `inline-flex items-center justify-center rounded shadow focus:(shadow-md outline-none ring) transition-component ease-in duration-200`,
       standard: (color: Color) =>
-        `text-white bg-${color}-500 hover:shadow-md focus:bg-${color}-450 focus:ring-${color}-500 focus:ring-opacity-40`,
+        `text-white bg-${color}-500 border(1 gray-500 opacity-0) hover:shadow-md focus:ring-${color}-500 focus:ring-opacity-40`,
       outlined: (color: Color) =>
-        `text-${color}-500 bg-opacity-0 border(1 ${color}-500 opacity-75) hover:(bg-${color}-500 bg-opacity-10 border-opacity-100) focus:(bg-${color}-500 bg-opacity-10 ring-${color}-500 ring-opacity-40)`,
+        `outlined text-${color}-500 bg-opacity-0 border(1 ${color}-500 opacity-75) hover:(bg-${color}-500 bg-opacity-10 border-opacity-100) focus:(bg-${color}-500 bg-opacity-10 ring-${color}-500 ring-opacity-40)`,
       flat: (color: Color) =>
-        `shadow-none text-${color}-500 bg-opacity-0 hover:(bg-${color}-500 bg-opacity-10) focus:(bg-${color}-500 bg-opacity-10 ring-${color}-500 ring-opacity-40)`,
+        `flat shadow-none text-${color}-500 bg-opacity-0 border(1 gray-500 opacity-0) hover:(bg-${color}-500 bg-opacity-10) focus:(bg-${color}-500 bg-opacity-10 ring-${color}-500 ring-opacity-40)`,
       disabled: `text(white opacity-50) bg(gray-500 opacity-50) cursor-not-allowed`,
       round: 'rounded-full',
       sm: 'text-sm py-0.5 px-3',
-      md: 'py-1.5 px-5',
-      lg: 'text-lg py-2 px-7',
+      md: 'py-1 px-4',
+      lg: 'text-lg py-1.5 px-6',
     },
     checkbox: {
       base: 'rounded-sm bg-transparent border(& gray-500 opacity-80) focus:(ring ring-offset-0) transition-component duration-200',
@@ -122,10 +122,10 @@ const baseTheme: GTheme = {
     list: {
       sm: 'p-1',
       md: 'p-2',
-      lg: 'p-3',
+      lg: 'p-5',
     },
     listItem: {
-      base: 'my-0.5 text-black override:dark:text-white rounded inline-flex items-center w-full select-none cursor-pointer transition-component duration-200',
+      base: 'my-0.5 text-black override:dark:text-white rounded inline-flex items-center w-full select-none cursor-pointer transition-component eas-in duration-200',
       activeColor: (color: Color) => `hover:bg(${color}-500 opacity-15)`,
       sm: 'py-1 px-2',
       md: 'py-1.5 px-3',

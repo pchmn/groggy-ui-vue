@@ -1,7 +1,9 @@
-import vue from '@vitejs/plugin-vue';
+import Vue from '@vitejs/plugin-vue';
 import path from 'path';
+import Components from 'unplugin-vue-components/vite';
 import { AliasOptions, defineConfig } from 'vite';
-import svgLoader from 'vite-svg-loader';
+import Pages from 'vite-plugin-pages';
+import Markdown from '../vite-plugin-md';
 
 let alias: AliasOptions = {};
 if (process.env.APP_ENV === 'development') {
@@ -58,7 +60,28 @@ if (process.env.APP_ENV === 'development') {
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
+    // vitePluginVuedoc({
+    //   previewComponent: 'DemoPreview',
+    // }),
+    Vue({
+      include: [/\.vue$/, /\.md$/], // <--
+    }),
+    Pages(),
+    Components({
+      resolvers: [
+        // example of importing Vant
+        (name) => {
+          // where `name` is always CapitalCase
+          if (name.startsWith('G'))
+            return { importName: name, path: '@groggy-ui/vue' };
+        },
+      ],
+      dts: true,
+      include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+    }),
+    Markdown({
+      wrapperComponent: 'DemoPreview',
+    }),
     // svgLoader({
     //   svgo: false,
     // }),

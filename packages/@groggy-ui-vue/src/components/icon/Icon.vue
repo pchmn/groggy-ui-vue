@@ -27,6 +27,9 @@ export default defineComponent({
 </script>
 
 <style scoped>
+i {
+  display: block;
+}
 i >>> svg {
   width: var(--height);
   height: var(--width);

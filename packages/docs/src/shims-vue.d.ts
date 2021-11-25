@@ -9,3 +9,9 @@ declare module '*.svg?component' {
   const src: Component;
   export default src;
 }
+
+declare module '*.md' {
+  import { ComponentOptions } from 'vue';
+  const Component: ComponentOptions;
+  export default Component;
+}

@@ -1,14 +1,15 @@
 <template>
   <g-card
     v-click-outside="closeDrawer"
-    :class="[
-      'rounded-l-none! h-full w-72 overflow-auto transform translate-x-0 transition-component duration-200',
+    v-tw="[
+      'h-full w-72 overflow-auto transform translate-x-0 transition-component duration-200',
       { '-translate-x-full': !matches && !isOpen },
       { 'fixed max-w-3/4': !matches },
     ]"
+    class="drawer"
     padding="none"
   >
-    <div v-if="$slots['header']" class="p-7">
+    <div v-if="$slots['header']" v-tw="'p-5'">
       <slot name="header" />
     </div>
 

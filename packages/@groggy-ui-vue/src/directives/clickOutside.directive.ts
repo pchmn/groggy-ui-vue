@@ -6,6 +6,7 @@ const clickOutsideDirective: Directive = {
       const target = event.target as HTMLElement;
       if (!(el == target || el.contains(target)) && isElementInViewport(el)) {
         if (typeof binding.value === 'function') {
+          console.log('in');
           binding.value();
         }
       }

@@ -1,12 +1,14 @@
-import vue from '@vitejs/plugin-vue'
-import path from 'path'
-import typescript from 'rollup-plugin-typescript2'
-import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue';
+import path from 'path';
+import typescript from 'rollup-plugin-typescript2';
+import { defineConfig } from 'vite';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
+    tsconfigPaths(),
     {
       ...typescript({
         tsconfig: './tsconfig.json',
@@ -24,7 +26,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
-      name: 'MonorepoLibExample'
+      name: 'GroggyUIVue',
+      fileName: (format) => `groggy-ui-vue.${format}.js`,
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
@@ -34,12 +37,9 @@ export default defineConfig({
         // Provide global variables to use in the UMD build
         // for externalized deps
         globals: {
-          vue: 'Vue'
-        }
+          vue: 'Vue',
+        },
       },
-      // plugins: [
-      //   typescript({ tsconfig: './tsconfig.json' }),
-      // ]
-    }
-  }
-})
+    },
+  },
+});

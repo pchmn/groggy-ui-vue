@@ -1,6 +1,6 @@
 <template>
-  <div class="mb-5">
-    <h3 class="mb-2 text(sm uppercase black dark:white opacity-50!)">
+  <div v-tw="'mb-5'">
+    <h3 v-tw="'mb-2 text(sm uppercase black dark:white opacity-50!)'">
       {{ title }}
     </h3>
     <slot />

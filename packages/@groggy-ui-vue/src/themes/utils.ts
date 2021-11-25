@@ -1,4 +1,4 @@
-import { Size } from '@models/common-props.types';
+import { Size, Variant } from '@models/common-props.types';
 import { ComponentNames, GTheme } from '@themes/theme';
 import { DeepPartial } from '@utils/deepPartial';
 import merge from 'deepmerge';
@@ -116,19 +116,14 @@ export function getComponentClasses<T extends ComponentNames>(
 
 type ButtonTheme = GTheme['components']['button'];
 function getButtonClasses(componentTheme: ButtonTheme, props: any): string {
-  const variantTheme =
-    props.variant === 'outlined'
-      ? `${componentTheme.outlined(props.color)} outlined`
-      : props.variant === 'flat'
-      ? `${componentTheme.flat(props.color)} flat`
-      : componentTheme.standard(props.color);
-
   return tw([
     componentTheme.base,
     componentTheme[props.size as Size],
-    props.disabled ? componentTheme.disabled : variantTheme,
+    props.disabled
+      ? componentTheme.disabled
+      : componentTheme[props.variant as Variant](props.color),
     {
-      [`${componentTheme.round}`]: props.round as boolean,
+      [componentTheme.round]: props.round as boolean,
     },
   ]);
 }

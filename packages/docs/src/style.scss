@@ -1,0 +1,16 @@
+html, body, #app {
+  height: 100%;
+}
+
+.markdown-body {
+  p {
+    margin: 1rem 0;
+  }
+}
+
+code:not(.language-vue) {
+  padding: 0.2rem;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  font-size: 0.8rem;
+}

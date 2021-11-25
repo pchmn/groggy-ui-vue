@@ -1,32 +1,40 @@
-import clickOutsideDirective from '@directives/clickOutside.directive';
-import twDirective from '@directives/tw.directive';
-import { useTheme } from '@themes/hooks/useTheme';
-import { GTheme } from '@themes/theme';
-import { setupTwind } from '@themes/twind/setup';
-import { extendTheme } from '@themes/utils';
-import { DeepPartial } from '@utils/deepPartial';
-import 'twind/shim';
+import { Configuration } from 'twind';
 import VWave from 'v-wave';
 import { App, DefineComponent } from 'vue';
+import clickOutsideDirective from './directives/clickOutside.directive';
+import twDirective from './directives/tw.directive';
 import './style.css';
+import { useTheme } from './themes/hooks/useTheme';
+import { GTheme } from './themes/theme';
+import { setupTwind } from './themes/twind/setup';
+import { extendTheme } from './themes/utils';
+import { DeepPartial } from './utils/deepPartial';
 
 export interface MonorepoLibExamplePlugin {
   install(
     app: App,
-    options?: { theme?: DeepPartial<GTheme>; components?: DefineComponent<any> }
+    options?: {
+      twindConf?: DeepPartial<Configuration>;
+      theme?: DeepPartial<GTheme>;
+      components?: DefineComponent<any>;
+    }
   ): void;
 }
 
 const MonorepoLibExample: MonorepoLibExamplePlugin = {
   install(
     app: App,
-    options?: { theme?: DeepPartial<GTheme>; components?: DefineComponent<any> }
+    options?: {
+      twindConf?: DeepPartial<Configuration>;
+      theme?: DeepPartial<GTheme>;
+      components?: DefineComponent<any>;
+    }
   ) {
     const { theme, applyTheme, switchThemeTo } = useTheme();
     if (options?.theme) {
       applyTheme(extendTheme(theme.value, options.theme) as GTheme);
     }
-    setupTwind(theme.value);
+    setupTwind(theme.value, options?.twindConf);
     // switchThemeTo('light');
     const prefix = 'G';
     for (const component in options?.components) {
